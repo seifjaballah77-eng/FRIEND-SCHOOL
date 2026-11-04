@@ -326,3 +326,9 @@ button,.quick-item,.course-row,.catalog-card{ -webkit-tap-highlight-color:transp
     box-shadow:0 0 0 2px rgba(84,217,233,.35),0 0 12px rgba(255,117,185,.18);
   }
 }
+
+
+/* Learning library cards are fully interactive and keyboard accessible. */
+.library-card[data-library-topic]{cursor:pointer}
+.library-card[data-library-topic]:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.library-card[data-library-topic]:active{transform:scale(.99)}
