@@ -555,3 +555,25 @@ body.light #lessonModal{background:var(--bg)}
 .knowledge-library-art{position:relative;color:transparent;font-size:0;background:linear-gradient(145deg,rgba(154,114,255,.25),rgba(84,217,233,.16));overflow:hidden}
 .knowledge-library-art::before{content:"";position:absolute;width:25px;height:25px;left:14px;top:14px;border:2px solid #a990ff;border-radius:7px;transform:rotate(12deg);box-shadow:0 0 14px rgba(154,114,255,.35)}
 .knowledge-library-art::after{content:"";position:absolute;width:10px;height:10px;left:21px;top:21px;border-radius:50%;background:#72deeb;box-shadow:0 0 13px rgba(84,217,233,.8)}
+
+/* ===== Critical fix: knowledge reader visibility and header layering ===== */
+/* The full-screen selector must never override the native hidden state. */
+#lessonModal.modal-backdrop[hidden]{display:none!important}
+#lessonModal.modal-backdrop:not([hidden]){display:block}
+#lessonModal .modal-kicker,
+#lessonModal #modalTitle,
+#lessonModal #modalDescription{display:none!important}
+/* Remove the legacy lesson-box styling around the new full-page document. */
+#lessonModal #modalContent.lesson-content{display:block;width:100%;max-width:none;margin:0;padding:0;border:0;border-radius:0;background:transparent;color:var(--text);font-size:inherit;line-height:normal;white-space:normal;overflow:visible}
+/* Keep the close control away from the page title and the back-to-library control. */
+#lessonModal .modal-close{position:fixed;top:16px;left:16px;right:auto;z-index:30;width:40px;height:40px;display:grid;place-items:center;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);font-size:24px;line-height:1;box-shadow:var(--shadow)}
+body[dir="ltr"] #lessonModal .modal-close{left:auto;right:16px}
+#lessonModal .knowledge-page{position:relative;min-height:100vh;color:var(--text)}
+#lessonModal .knowledge-top{min-height:44px;padding-inline-start:54px}
+#lessonModal .knowledge-back{position:relative;z-index:1}
+@media(max-width:650px){
+  #lessonModal .modal-close{top:10px;left:10px;width:36px;height:36px}
+  body[dir="ltr"] #lessonModal .modal-close{left:auto;right:10px}
+  #lessonModal .knowledge-page{padding-top:13px}
+  #lessonModal .knowledge-top{padding-inline-start:42px}
+}
