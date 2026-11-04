@@ -551,3 +551,7 @@ body.light #lessonModal{background:var(--bg)}
 .knowledge-method-list li::marker{color:var(--purple);font-weight:800}
 @media(max-width:760px){.library-filter-bar{align-items:stretch}.library-filter-bar select{min-width:0;flex:1}.library-track-filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.library-track-filters button:first-child{grid-column:1/-1}}
 @media(max-width:430px){.library-filter-bar{flex-direction:column}.library-filter-bar select{width:100%;height:42px}.library-track-filters button{font-size:9px;padding:8px 7px}.library-card{min-height:195px}.knowledge-quicktake{padding:16px}.knowledge-quicktake p{font-size:12px}.knowledge-step{padding:12px;gap:10px}.knowledge-step p{font-size:11px}}
+
+.knowledge-library-art{position:relative;color:transparent;font-size:0;background:linear-gradient(145deg,rgba(154,114,255,.25),rgba(84,217,233,.16));overflow:hidden}
+.knowledge-library-art::before{content:"";position:absolute;width:25px;height:25px;left:14px;top:14px;border:2px solid #a990ff;border-radius:7px;transform:rotate(12deg);box-shadow:0 0 14px rgba(154,114,255,.35)}
+.knowledge-library-art::after{content:"";position:absolute;width:10px;height:10px;left:21px;top:21px;border-radius:50%;background:#72deeb;box-shadow:0 0 13px rgba(84,217,233,.8)}
