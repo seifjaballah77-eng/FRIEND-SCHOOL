@@ -12,7 +12,7 @@
   --aura-purple:rgba(154,114,255,.24);
   --aura-speed:14s;
 }
-@keyframes aura-orbit{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes aura-hue{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(360deg)}}
 @keyframes aura-sparkle{0%,100%{filter:hue-rotate(0deg) drop-shadow(0 0 3px rgba(255,255,255,.35));transform:scale(1)}50%{filter:hue-rotate(85deg) drop-shadow(0 0 9px rgba(84,217,233,.7));transform:scale(1.12)}}
 @keyframes aura-breathe{0%,100%{opacity:.42}50%{opacity:.82}}
 /* The glow is drawn behind a clean inner surface so text stays crisp. */
@@ -34,12 +34,14 @@
   content:"";
   position:absolute;
   z-index:-1;
-  inset:-1px;
+  inset:0;
   border-radius:inherit;
   padding:1px;
+  transform:none;
+  transform-origin:50% 50%;
   background:conic-gradient(from 0deg,transparent 0deg,var(--aura-pink) 62deg,transparent 112deg,var(--aura-cyan) 188deg,transparent 238deg,var(--aura-gold) 302deg,transparent 360deg);
   opacity:0;
-  animation:aura-orbit var(--aura-speed) linear infinite;
+  animation:aura-hue var(--aura-speed) linear infinite;
   transition:opacity .4s ease,filter .4s ease;
   pointer-events:none;
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
