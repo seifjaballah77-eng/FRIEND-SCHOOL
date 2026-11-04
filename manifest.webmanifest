@@ -1,0 +1,20 @@
+{
+  "name": "FRIEND SCHOOL",
+  "short_name": "FRIEND SCHOOL",
+  "description": "مساحة تعليمية مجانية للتعلم والمراجعة وتنظيم الدراسة",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#090914",
+  "theme_color": "#090914",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
