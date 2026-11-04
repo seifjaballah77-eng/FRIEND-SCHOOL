@@ -577,3 +577,8 @@ body[dir="ltr"] #lessonModal .modal-close{left:auto;right:16px}
   #lessonModal .knowledge-page{padding-top:13px}
   #lessonModal .knowledge-top{padding-inline-start:42px}
 }
+
+/* The action buttons remain a single persistent pair wired by the app. */
+#lessonModal .modal-card>.lesson-actions{width:min(1050px,100%);max-width:1050px;margin:0 auto;padding:18px 34px 50px;display:flex;justify-content:space-between;gap:12px;background:transparent}
+#lessonModal .modal-card>.lesson-actions button{min-height:44px}
+@media(max-width:650px){#lessonModal .modal-card>.lesson-actions{padding:15px 14px 32px;flex-direction:column}#lessonModal .modal-card>.lesson-actions button{width:100%}}
