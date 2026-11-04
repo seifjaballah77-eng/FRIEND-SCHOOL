@@ -20,6 +20,7 @@ FRIEND SCHOOL starts with an Arabic-first interface and a practical set of worki
 - Knowledge library with search and category filters.
 - Arabic, English, and French interface labels.
 - Dark/light appearance, local data export, and local data clearing.
+- Country and territory selector covering all 249 ISO 3166-1 alpha-2 entries in the bundled country dataset.
 - PWA manifest and service worker for offline use after the first successful load.
 
 ## Publish with GitHub Pages
@@ -54,3 +55,7 @@ Tasks, notes, flashcards, profile preferences, and progress are stored in the br
 ## License
 
 Add a license file before accepting external contributions.
+
+## Country list data
+The bundled `countries.json` is derived from the datasets/country-list project, which republishes ISO 3166-1 alpha-2 names and codes. It includes countries and territories; it does **not** mean that official school curricula for all listed places are already included.
+Source: https://github.com/datasets/country-list (data file: https://raw.githubusercontent.com/datasets/country-list/main/data.csv).
