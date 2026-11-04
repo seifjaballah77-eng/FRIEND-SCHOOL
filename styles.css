@@ -278,3 +278,51 @@ button,.quick-item,.course-row,.catalog-card{ -webkit-tap-highlight-color:transp
  .app-footer{justify-content:center;text-align:center;padding-top:21px;gap:11px 16px}
  .app-footer .footer-signature{order:4}
 }
+
+
+/* ===== Gemini-inspired multicolor touch feedback ===== */
+@keyframes touch-spectrum {
+  0% { filter:hue-rotate(0deg) saturate(1.25); }
+  50% { filter:hue-rotate(180deg) saturate(1.45); }
+  100% { filter:hue-rotate(360deg) saturate(1.25); }
+}
+@keyframes touch-spectrum-shadow {
+  0%,100% {
+    box-shadow:0 0 0 1px rgba(255,117,185,.48),0 0 17px rgba(255,117,185,.22),0 0 28px rgba(154,114,255,.13);
+  }
+  33% {
+    box-shadow:0 0 0 1px rgba(84,217,233,.55),0 0 19px rgba(84,217,233,.24),0 0 30px rgba(74,133,255,.15);
+  }
+  66% {
+    box-shadow:0 0 0 1px rgba(255,198,108,.5),0 0 18px rgba(255,198,108,.2),0 0 29px rgba(255,117,185,.14);
+  }
+}
+/* Touch presses briefly reveal a flowing spectrum, not a fixed purple flash. */
+@media (hover:none), (pointer:coarse) {
+  button:active,.quick-item:active,.catalog-card:active,.course-row:active,
+  .library-card:active,.game-card:active,.nav-link:active {
+    animation:touch-spectrum-shadow .85s ease-in-out infinite;
+    border-color:rgba(84,217,233,.55);
+  }
+  .stat-card:active::before,.quick-item:active::before,.catalog-card:active::before,
+  .course-row:active::before,.game-card:active::before,.library-card:active::before,
+  .flashcard:active::before,.quiz-panel:active::before,.quiz-side:active::before,
+  .pomodoro-panel:active::before,.planner-panel:active::before,.tool-card:active::before,
+  .welcome-banner:active::before,.sidebar-tip:active::before {
+    opacity:1;
+    animation:aura-hue 2.2s linear infinite,touch-spectrum .9s linear infinite;
+    filter:drop-shadow(0 0 10px rgba(84,217,233,.35));
+  }
+  .nav-link:active::before {
+    opacity:1;
+    background:linear-gradient(110deg,rgba(255,117,185,.28),rgba(154,114,255,.28),rgba(84,217,233,.28),rgba(255,198,108,.25));
+    animation:touch-spectrum .9s linear infinite;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  button:active,.quick-item:active,.catalog-card:active,.course-row:active,
+  .library-card:active,.game-card:active,.nav-link:active {
+    animation:none;
+    box-shadow:0 0 0 2px rgba(84,217,233,.35),0 0 12px rgba(255,117,185,.18);
+  }
+}
