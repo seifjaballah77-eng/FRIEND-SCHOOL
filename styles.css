@@ -233,3 +233,48 @@ button,.quick-item,.course-row,.catalog-card{ -webkit-tap-highlight-color:transp
  .library-level-guide{gap:7px}
  .library-level-guide span{width:100%}
 }
+
+
+/* ===== Refined footer & creator signature ===== */
+.app-footer{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:13px 20px;
+  margin-top:34px;
+  padding:24px 5px 15px;
+  border-top:0;
+  color:var(--muted);
+}
+.app-footer::before{
+  content:"";
+  position:absolute;
+  top:0;left:1%;right:1%;height:1px;
+  border-radius:999px;
+  background:linear-gradient(90deg,transparent,rgba(154,114,255,.28),rgba(84,217,233,.22),rgba(255,117,185,.2),transparent);
+}
+.app-footer .footer-brand{font:800 10px var(--font-ui,Inter,sans-serif);letter-spacing:.8px;color:var(--purple)}
+.app-footer .footer-motto{font-size:10px;color:var(--muted)}
+.app-footer .footer-free{font-size:9px;color:var(--green)}
+.app-footer .footer-signature{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:7px 11px;border:1px solid rgba(154,114,255,.15);
+  border-radius:999px;background:linear-gradient(100deg,rgba(154,114,255,.055),rgba(84,217,233,.045));
+  color:var(--muted);font-size:10px;white-space:nowrap;
+  box-shadow:0 0 16px rgba(154,114,255,.055);
+}
+.footer-signature strong{
+  color:var(--text);font-weight:800;
+  text-shadow:0 0 12px rgba(154,114,255,.25);
+}
+.footer-signature .signature-spark{
+  color:var(--gold);font-size:13px;
+  filter:drop-shadow(0 0 5px rgba(255,198,108,.45));
+  animation:aura-breathe 3.5s ease-in-out infinite;
+}
+@media(max-width:640px){
+ .app-footer{justify-content:center;text-align:center;padding-top:21px;gap:11px 16px}
+ .app-footer .footer-signature{order:4}
+}
