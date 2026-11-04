@@ -2,3 +2,144 @@
 @media(max-width:1100px){.sidebar{width:225px}.main-area{margin-left:225px}.content-wrap{padding:24px}.topbar{padding:0 24px}.course-cards,.library-grid{grid-template-columns:repeat(2,1fr)}.stats-grid{grid-template-columns:repeat(2,1fr)}.quick-grid{grid-template-columns:repeat(5,1fr)}body[dir="ltr"] .main-area{margin-right:225px}}
 @media(max-width:760px){.sidebar{transform:translateX(-105%);transition:transform .25s;width:260px;box-shadow:var(--shadow)}.sidebar.open{transform:translateX(0)}body[dir="ltr"] .sidebar{transform:translateX(105%)}body[dir="ltr"] .sidebar.open{transform:translateX(0)}.main-area,body[dir="ltr"] .main-area{margin:0}.topbar{height:64px;padding:0 14px;gap:8px}.mobile-menu{display:block;flex-shrink:0}.breadcrumb{font-size:10px;white-space:nowrap}.top-actions{gap:6px}.global-search{width:35px;padding:0 8px;border:0;background:transparent}.global-search input,.global-search kbd{display:none}.global-search>span{font-size:23px}.icon-button,.language-pill{width:33px;height:33px}.language-pill{font-size:9px;width:auto}.content-wrap{padding:17px 14px}.welcome-banner{min-height:230px;padding:24px 20px}.welcome-content{max-width:75%}.welcome-banner h1{font-size:23px}.welcome-banner p{font-size:10px;line-height:1.8}.banner-art{inset:0 59% 0 0;opacity:.55}.book-illustration{transform:scale(.75) rotate(-9deg)}.orbit{transform:scale(.75)}.chip-one,.chip-three{display:none}.stats-grid{gap:9px}.stat-card{padding:12px;min-height:100px;gap:8px}.stat-card strong{font-size:20px}.dashboard-grid,.quiz-layout,.flash-layout,.planner-layout,.notes-layout,.tools-grid{grid-template-columns:1fr}.pomodoro-panel{grid-row:auto}.quick-grid{grid-template-columns:repeat(3,1fr)}.quick-item{min-height:100px;padding:10px}.course-cards,.library-grid,.game-grid{grid-template-columns:repeat(2,1fr)}.page-intro h1{font-size:21px}.page-intro p{font-size:10px;max-width:300px;line-height:1.7}.filter-bar{flex-wrap:wrap}.filter-search{flex-basis:100%}.filter-bar select{flex:1;height:39px}.quiz-side{display:none}.settings-grid{grid-template-columns:1fr}.app-footer{gap:8px;flex-wrap:wrap}.task-form{flex-wrap:wrap}.task-form input:first-child{flex-basis:100%}.task-form input[type=date]{flex:1;max-width:none}.flashcard{min-height:220px}}
 @media(max-width:430px){.course-cards,.library-grid,.game-grid{grid-template-columns:1fr}.quick-grid{grid-template-columns:repeat(2,1fr)}.welcome-content{max-width:100%}.banner-art{opacity:.2;inset:0 30% 0 0}.welcome-banner h1{font-size:21px}.stats-grid{grid-template-columns:repeat(2,1fr)}.page-intro{align-items:flex-start}.intro-icon{width:43px;height:43px;font-size:20px;flex-shrink:0}.lesson-actions{flex-direction:column}.lesson-actions button{width:100%}}
+
+
+/* ===== Aura glow interaction layer ===== */
+:root{
+  --aura-pink:rgba(255,117,185,.28);
+  --aura-cyan:rgba(84,217,233,.25);
+  --aura-gold:rgba(255,198,108,.22);
+  --aura-purple:rgba(154,114,255,.24);
+  --aura-speed:14s;
+}
+@keyframes aura-orbit{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes aura-sparkle{0%,100%{filter:hue-rotate(0deg) drop-shadow(0 0 3px rgba(255,255,255,.35));transform:scale(1)}50%{filter:hue-rotate(85deg) drop-shadow(0 0 9px rgba(84,217,233,.7));transform:scale(1.12)}}
+@keyframes aura-breathe{0%,100%{opacity:.42}50%{opacity:.82}}
+/* The glow is drawn behind a clean inner surface so text stays crisp. */
+.stat-card,.quick-item,.catalog-card,.course-row,.course-card,.game-card,.library-card,
+.flashcard,.add-card-panel,.quiz-panel,.quiz-side,.pomodoro-panel,.planner-panel,
+.notes-panel,.tool-card,.settings-card,.sidebar-tip,.welcome-banner,.section-panel,
+.lesson-card,.memory-card{
+  position:relative;
+  isolation:isolate;
+  border-color:var(--line);
+  transition:border-color .35s ease,box-shadow .35s ease,transform .35s ease,background-color .35s ease;
+}
+.stat-card::before,.quick-item::before,.catalog-card::before,.course-row::before,
+.course-card::before,.game-card::before,.library-card::before,.flashcard::before,
+.add-card-panel::before,.quiz-panel::before,.quiz-side::before,.pomodoro-panel::before,
+.planner-panel::before,.notes-panel::before,.tool-card::before,.settings-card::before,
+.sidebar-tip::before,.welcome-banner::before,.section-panel::before,.lesson-card::before,
+.memory-card::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:-1px;
+  border-radius:inherit;
+  padding:1px;
+  background:conic-gradient(from 0deg,transparent 0deg,var(--aura-pink) 62deg,transparent 112deg,var(--aura-cyan) 188deg,transparent 238deg,var(--aura-gold) 302deg,transparent 360deg);
+  opacity:0;
+  animation:aura-orbit var(--aura-speed) linear infinite;
+  transition:opacity .4s ease,filter .4s ease;
+  pointer-events:none;
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+}
+.stat-card:hover::before,.quick-item:hover::before,.catalog-card:hover::before,
+.course-row:hover::before,.course-card:hover::before,.game-card:hover::before,
+.library-card:hover::before,.flashcard:hover::before,.add-card-panel:focus-within::before,
+.quiz-panel:hover::before,.quiz-side:hover::before,.pomodoro-panel:hover::before,
+.planner-panel:hover::before,.notes-panel:focus-within::before,.tool-card:hover::before,
+.settings-card:focus-within::before,.sidebar-tip:hover::before,.welcome-banner:hover::before,
+.section-panel:hover::before,.lesson-card:hover::before,.memory-card:hover::before{
+  opacity:.9;
+  filter:drop-shadow(0 0 8px var(--aura-cyan));
+  animation-duration:7s;
+}
+.stat-card:hover,.quick-item:hover,.catalog-card:hover,.course-row:hover,.course-card:hover,
+.game-card:hover,.library-card:hover,.flashcard:hover,.quiz-panel:hover,.quiz-side:hover,
+.pomodoro-panel:hover,.planner-panel:hover,.notes-panel:focus-within,.tool-card:hover,
+.settings-card:focus-within,.sidebar-tip:hover,.welcome-banner:hover,.section-panel:hover,
+.lesson-card:hover,.memory-card:hover{
+  border-color:rgba(154,114,255,.42);
+  box-shadow:0 12px 34px rgba(116,72,239,.12),0 0 20px rgba(84,217,233,.055);
+}
+.quick-item:active,.catalog-card:active,.course-row:active,.course-card:active,
+.game-card:active,.library-card:active,.nav-link:active{
+  transform:scale(.985);
+}
+.quick-item:focus-visible,.catalog-card:focus-visible,.course-row:focus-visible,
+.course-card:focus-visible,.game-card:focus-visible,.library-card:focus-visible{
+  outline:2px solid var(--cyan);
+  outline-offset:3px;
+}
+/* Active navigation retains a subtle glow; inactive items stay calm. */
+.nav-link{position:relative;overflow:hidden;transition:color .3s ease,background .3s ease,box-shadow .35s ease,transform .3s ease}
+.nav-link::before{
+  content:"";
+  position:absolute;
+  inset:2px;
+  border-radius:9px;
+  background:linear-gradient(110deg,rgba(255,117,185,.18),rgba(84,217,233,.12),rgba(255,198,108,.13));
+  opacity:0;
+  transition:opacity .35s ease;
+  pointer-events:none;
+}
+.nav-link.active{
+  box-shadow:0 7px 22px rgba(116,72,239,.25),0 0 18px rgba(154,114,255,.14);
+}
+.nav-link.active::before{opacity:1}
+.nav-link.active::after{
+  content:"✦";
+  position:absolute;
+  inset-inline-end:12px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#fff4c8;
+  font-size:12px;
+  animation:aura-sparkle 3.8s ease-in-out infinite;
+  text-shadow:0 0 9px rgba(255,255,255,.8);
+  pointer-events:none;
+}
+.nav-link.active .nav-count{opacity:0}
+.nav-link>*{position:relative;z-index:1}
+/* The page currently being viewed gets a soft persistent edge aura. */
+.page.active .page-intro .intro-icon{
+  box-shadow:0 0 0 1px rgba(154,114,255,.18),0 0 22px rgba(154,114,255,.18),0 0 34px rgba(84,217,233,.08);
+  transition:box-shadow .4s ease;
+}
+.page.active .section-heading h2::after{
+  content:"";
+  display:inline-block;
+  width:5px;height:5px;
+  margin-inline-start:9px;
+  vertical-align:middle;
+  border-radius:50%;
+  background:var(--cyan);
+  box-shadow:0 0 10px var(--cyan);
+  animation:aura-breathe 2.8s ease-in-out infinite;
+}
+/* Small sparkle glyphs gain a restrained shifting glow on interaction. */
+.section-heading .sparkle,.section-heading .section-sparkle,.tip-spark,
+.nav-count,.brand-mark i{
+  transition:filter .35s ease,color .35s ease,transform .35s ease;
+}
+.section-heading:hover .sparkle,.section-heading:hover .section-sparkle,
+.sidebar-tip:hover .tip-spark,.nav-link.active .nav-icon{
+  color:#fff0bb;
+  filter:drop-shadow(0 0 7px rgba(255,198,108,.75));
+  animation:aura-sparkle 3.5s ease-in-out infinite;
+}
+@media(hover:none){
+  .stat-card:active::before,.quick-item:active::before,.catalog-card:active::before,
+  .course-row:active::before,.course-card:active::before,.game-card:active::before,
+  .library-card:active::before,.flashcard:active::before,.quiz-panel:active::before,
+  .pomodoro-panel:active::before,.planner-panel:active::before,.tool-card:active::before{
+    opacity:.95;animation-duration:6s;
+  }
+  .nav-link:active::before{opacity:.75}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
