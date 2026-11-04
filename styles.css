@@ -582,3 +582,18 @@ body[dir="ltr"] #lessonModal .modal-close{left:auto;right:16px}
 #lessonModal .modal-card>.lesson-actions{width:min(1050px,100%);max-width:1050px;margin:0 auto;padding:18px 34px 50px;display:flex;justify-content:space-between;gap:12px;background:transparent}
 #lessonModal .modal-card>.lesson-actions button{min-height:44px}
 @media(max-width:650px){#lessonModal .modal-card>.lesson-actions{padding:15px 14px 32px;flex-direction:column}#lessonModal .modal-card>.lesson-actions button{width:100%}}
+
+/* Final layout correction: make the lesson reader a true full-screen page. */
+#lessonModal.modal-backdrop{position:fixed;inset:0;z-index:9999;padding:0;margin:0;place-items:stretch;background:var(--bg,#080b14);backdrop-filter:none;overflow:hidden}
+#lessonModal.modal-backdrop:not([hidden]){display:block!important}
+#lessonModal .modal-card{display:block;position:relative;width:100%;max-width:none;height:100vh;height:100dvh;max-height:none;min-height:100%;margin:0;padding:0;overflow-x:hidden;overflow-y:auto;border:0;border-radius:0;background:var(--bg,#080b14);color:var(--text,#f5f5ff);box-shadow:none}
+#lessonModal #modalContent.lesson-content{min-height:100vh;min-height:100dvh;width:100%;margin:0;padding:0;background:var(--bg,#080b14);color:var(--text,#f5f5ff);overflow:visible}
+#lessonModal .knowledge-page{display:block;width:100%;max-width:1050px;min-height:100vh;margin:0 auto;padding:22px 34px 55px;background:transparent;color:var(--text,#f5f5ff);visibility:visible;opacity:1}
+#lessonModal .knowledge-page *{visibility:visible}
+#lessonModal .knowledge-hero,#lessonModal .knowledge-section,#lessonModal .knowledge-quicktake{color:var(--text,#f5f5ff)}
+#lessonModal .knowledge-hero h1,#lessonModal .knowledge-section h2,#lessonModal .knowledge-section h3{color:var(--text,#f5f5ff)}
+#lessonModal .knowledge-hero p,#lessonModal .knowledge-section p,#lessonModal .knowledge-step p{color:var(--muted,#b9bfd0)}
+#lessonModal .modal-close{position:fixed;top:14px;left:14px;right:auto;z-index:10001}
+body[dir="ltr"] #lessonModal .modal-close{left:auto;right:14px}
+#lessonModal .knowledge-top{padding-inline-start:52px}
+@media(max-width:650px){#lessonModal .knowledge-page{padding:14px 14px 35px}#lessonModal .knowledge-top{padding-inline-start:43px}#lessonModal .modal-close{top:9px;left:9px}body[dir="ltr"] #lessonModal .modal-close{left:auto;right:9px}}
