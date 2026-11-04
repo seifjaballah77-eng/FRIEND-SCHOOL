@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090914">
+  <meta name="description" content="FRIEND SCHOOL — مساحة تعليمية عالمية للتعلم والمراجعة وتنظيم الدراسة.">
+  <title>FRIEND SCHOOL | تعلّم بلا حدود</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark"><span>F</span><i></i></div>
+        <div><strong>FRIEND<span>SCHOOL</span></strong><small data-i18n="brandTag">مساحة تعلّمك الذكية</small></div>
+      </div>
+      <div class="profile-mini">
+        <div class="avatar" id="avatarInitial">S</div>
+        <div class="profile-copy"><strong id="sideName">طالب جديد</strong><small data-i18n="studentAccount">حساب الطالب على هذا الجهاز</small></div>
+        <span class="online-dot"></span>
+      </div>
+      <nav class="nav-groups" aria-label="التنقل الرئيسي">
+        <p class="nav-label" data-i18n="mainMenu">القائمة الرئيسية</p>
+        <button class="nav-link active" data-view="home"><span class="nav-icon">⌂</span><span data-i18n="navHome">الرئيسية</span></button>
+        <button class="nav-link" data-view="explore"><span class="nav-icon">◎</span><span data-i18n="navExplore">استكشف المناهج</span><span class="nav-count">✦</span></button>
+        <button class="nav-link" data-view="courses"><span class="nav-icon">▤</span><span data-i18n="navCourses">موادي ودروسي</span></button>
+        <button class="nav-link" data-view="quiz"><span class="nav-icon">✎</span><span data-i18n="navQuiz">الاختبارات</span></button>
+        <button class="nav-link" data-view="cards"><span class="nav-icon">▧</span><span data-i18n="navCards">بطاقات الحفظ</span></button>
+        <button class="nav-link" data-view="games"><span class="nav-icon">♧</span><span data-i18n="navGames">ألعاب تعليمية</span></button>
+        <p class="nav-label second-label" data-i18n="studyTools">أدوات الدراسة</p>
+        <button class="nav-link" data-view="planner"><span class="nav-icon">◷</span><span data-i18n="navPlanner">مخطط الدراسة</span></button>
+        <button class="nav-link" data-view="notes"><span class="nav-icon">▧</span><span data-i18n="navNotes">ملاحظاتي</span></button>
+        <button class="nav-link" data-view="tools"><span class="nav-icon">⌘</span><span data-i18n="navTools">أدوات ذكية</span></button>
+        <button class="nav-link" data-view="library"><span class="nav-icon">▥</span><span data-i18n="navLibrary">مكتبة المعرفة</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-tip"><div class="tip-spark">✦</div><strong data-i18n="tipTitle">خطوة صغيرة كل يوم</strong><p data-i18n="tipText">الاستمرار يصنع الفرق. خصص وقتاً قصيراً للتعلم اليوم.</p></div>
+        <button class="nav-link" data-view="settings"><span class="nav-icon">⚙</span><span data-i18n="navSettings">الإعدادات</span></button>
+        <div class="sidebar-foot">FRIEND SCHOOL <span>•</span> <span data-i18n="freeForever">مجاني للجميع</span></div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu icon-button" id="mobileMenu" aria-label="فتح القائمة">☰</button>
+        <div class="breadcrumb"><span data-i18n="breadcrumb">مساحة التعلم</span><b>/</b><strong id="pageCrumb">الرئيسية</strong></div>
+        <div class="top-actions">
+          <label class="global-search"><span>⌕</span><input id="globalSearch" type="search" placeholder="ابحث عن مادة أو درس..." data-i18n-placeholder="searchPlaceholder"><kbd>⌘ K</kbd></label>
+          <button class="icon-button" id="installBtn" title="تثبيت التطبيق" aria-label="تثبيت التطبيق" hidden>⇩</button>
+          <button class="icon-button theme-toggle" id="themeToggle" title="تبديل المظهر" aria-label="تبديل المظهر">☼</button>
+          <button class="language-pill" id="languageToggle" title="تغيير اللغة">عربي⌄</button>
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="page active" id="page-home">
+          <div class="welcome-banner">
+            <div class="welcome-content">
+              <div class="eyebrow"><span class="pulse"></span><span data-i18n="welcomeEyebrow">مستقبلك يبدأ بخطوة</span></div>
+              <h1><span data-i18n="hello">مرحباً بك</span>، <span id="welcomeName">يا صديقي</span> <span class="wave">✦</span></h1>
+              <p data-i18n="welcomeText">اكتشف المعرفة، نظّم وقتك، وتقدّم نحو أهدافك الدراسية كل يوم.</p>
+              <button class="primary-button" data-go="explore"><span data-i18n="exploreNow">ابدأ الاستكشاف</span><b>←</b></button>
+            </div>
+            <div class="banner-art" aria-hidden="true">
+              <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+              <div class="book-illustration"><span>✦</span><strong>知</strong><small>LEARN</small></div>
+              <div class="float-chip chip-one">A +</div><div class="float-chip chip-two">π</div><div class="float-chip chip-three">文</div>
+            </div>
+            <div class="banner-glow"></div>
+          </div>
+
+          <div class="section-heading"><div><span class="section-kicker" data-i18n="yourJourney">رحلتك التعليمية</span><h2 data-i18n="overview">نظرة عامة</h2></div><span class="today-label" id="todayLabel"></span></div>
+          <div class="stats-grid">
+            <article class="stat-card"><div class="stat-icon violet">▤</div><div><span data-i18n="statCourses">دروس بدأت بها</span><strong id="statCourses">0</strong><small data-i18n="statCoursesNote">واصل التعلّم</small></div><div class="stat-line"><i style="width:28%"></i></div></article>
+            <article class="stat-card"><div class="stat-icon cyan">◷</div><div><span data-i18n="statMinutes">دقائق تركيز</span><strong id="statMinutes">0</strong><small data-i18n="statMinutesNote">كل دقيقة تصنع فرقاً</small></div><div class="stat-line cyan-line"><i id="minuteLine" style="width:12%"></i></div></article>
+            <article class="stat-card"><div class="stat-icon pink">✎</div><div><span data-i18n="statQuizzes">اختبارات مكتملة</span><strong id="statQuizzes">0</strong><small data-i18n="statQuizzesNote">اختبر معلوماتك</small></div><div class="stat-line pink-line"><i id="quizLine" style="width:5%"></i></div></article>
+            <article class="stat-card"><div class="stat-icon gold">✦</div><div><span data-i18n="statStreak">أيام التزام</span><strong id="statStreak">0</strong><small data-i18n="statStreakNote">ابدأ سلسلة إنجازك</small></div><div class="stat-line gold-line"><i style="width:18%"></i></div></article>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="panel recommended-panel">
+              <div class="panel-heading"><div><h3 data-i18n="recommended">ابدأ من هنا</h3><p data-i18n="recommendedSub">مسارات مختارة لتوسيع معرفتك</p></div><button class="text-button" data-go="courses"><span data-i18n="seeAll">عرض الكل</span> ←</button></div>
+              <div class="course-list" id="homeCourseList"></div>
+            </div>
+            <div class="panel focus-panel">
+              <div class="panel-heading"><div><h3 data-i18n="focusToday">جلسة تركيز</h3><p data-i18n="focusSub">25 دقيقة من الانتباه تصنع إنجازاً</p></div><span class="tiny-status">FOCUS</span></div>
+              <div class="mini-timer"><div class="mini-timer-ring"><div><strong id="miniTimer">25:00</strong><small data-i18n="minutes">دقيقة</small></div></div></div>
+              <button class="primary-button full-button" data-go="tools"><span data-i18n="startFocus">ابدأ جلسة التركيز</span> <b>↗</b></button>
+              <div class="focus-foot"><span>✦</span><span data-i18n="focusQuote">ركّز على التقدم، لا على الكمال.</span></div>
+            </div>
+          </div>
+          <div class="panel quick-panel"><div class="panel-heading"><div><h3 data-i18n="quickAccess">وصول سريع</h3><p data-i18n="quickSub">كل أدواتك الدراسية في مكان واحد</p></div></div>
+            <div class="quick-grid">
+              <button class="quick-item" data-go="quiz"><span class="quick-icon q-purple">✎</span><strong data-i18n="quickQuiz">اختبار سريع</strong><small data-i18n="quickQuizSub">قيّم مستواك</small></button>
+              <button class="quick-item" data-go="cards"><span class="quick-icon q-blue">▧</span><strong data-i18n="quickCards">بطاقات الحفظ</strong><small data-i18n="quickCardsSub">تذكر بذكاء</small></button>
+              <button class="quick-item" data-go="planner"><span class="quick-icon q-orange">◷</span><strong data-i18n="quickPlan">خطط ليومك</strong><small data-i18n="quickPlanSub">نظّم مهامك</small></button>
+              <button class="quick-item" data-go="notes"><span class="quick-icon q-pink">▤</span><strong data-i18n="quickNotes">دوّن فكرة</strong><small data-i18n="quickNotesSub">لا تفقد أفكارك</small></button>
+              <button class="quick-item" data-go="games"><span class="quick-icon q-green">♧</span><strong data-i18n="quickGames">العب وتعلّم</strong><small data-i18n="quickGamesSub">تحديات معرفية</small></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="page" id="page-explore">
+          <div class="page-intro"><div><span class="section-kicker" data-i18n="globalLearning">تعليم بلا حدود</span><h1 data-i18n="exploreTitle">استكشف المناهج العالمية</h1><p data-i18n="exploreDesc">تعرّف على المواد والمسارات التعليمية من مختلف أنحاء العالم.</p></div><div class="intro-icon">◎</div></div>
+          <div class="filter-bar"><label class="filter-search">⌕ <input id="courseSearch" type="search" placeholder="ابحث عن مادة أو مهارة..."></label><select id="countryFilter" aria-label="الدولة"><option value="all">كل الدول</option><option>تونس</option><option>الجزائر</option><option>المغرب</option><option>مصر</option><option>السعودية</option><option>فرنسا</option><option>المملكة المتحدة</option><option>الولايات المتحدة</option><option>كندا</option><option>ألمانيا</option><option>اليابان</option><option>الهند</option></select><select id="levelFilter" aria-label="المستوى"><option value="all">كل المستويات</option><option>ابتدائي</option><option>إعدادي</option><option>ثانوي</option><option>جامعي</option><option>عام</option></select></div>
+          <div class="catalog-note"><span>✦</span><p data-i18n="catalogNote">هذه مكتبة تأسيسية قابلة للتوسع. تصفح المسارات المتاحة الآن؛ إدراج المناهج الرسمية لكل دولة يتطلب إضافة مصادرها المعتمدة.</p></div>
+          <div class="course-cards" id="exploreCourses"></div>
+        </section>
+
+        <section class="page" id="page-courses">
+          <div class="page-intro"><div><span class="section-kicker" data-i18n="learningSpace">مساحة التعلّم</span><h1 data-i18n="coursesTitle">موادي ودروسي</h1><p data-i18n="coursesDesc">تابع مساراتك التعليمية وافتح أي درس للبدء.</p></div><div class="intro-icon">▤</div></div>
+          <div class="course-cards" id="allCourses"></div>
+        </section>
+
+        <section class="page" id="page-quiz">
+          <div class="page-intro"><div><span class="section-kicker" data-i18n="testYourself">اختبر نفسك</span><h1 data-i18n="quizTitle">مركز الاختبارات</h1><p data-i18n="quizDesc">أسئلة قصيرة تساعدك على تثبيت ما تعلّمته.</p></div><div class="intro-icon">✎</div></div>
+          <div class="quiz-layout"><div class="panel quiz-panel"><div class="quiz-top"><span class="tiny-status">QUICK CHALLENGE</span><span id="quizProgress">السؤال 1 من 5</span></div><div class="quiz-progress"><i id="quizProgressBar"></i></div><div id="quizBody"></div><div class="quiz-actions"><button class="secondary-button" id="quizRestart">إعادة الاختبار</button><button class="primary-button" id="quizNext">تحقق من الإجابة <b>←</b></button></div></div><div class="panel quiz-side"><div class="quiz-side-icon">✦</div><h3 data-i18n="quizTipTitle">تعلّم من كل محاولة</h3><p data-i18n="quizTipText">النتيجة ليست كل شيء. اقرأ التفسير بعد كل سؤال واستفد من أخطائك.</p><div class="quiz-best"><span data-i18n="lastScore">آخر نتيجة</span><strong id="lastScore">—</strong></div></div></div>
+        </section>
+
+        <section class="page" id="page-cards">
+          <div class="page-intro"><div><span class="section-kicker" data-i18n="rememberBetter">تذكّر بذكاء</span><h1 data-i18n="cardsTitle">بطاقات الحفظ الذكية</h1><p data-i18n="cardsDesc">حوّل المعلومات إلى بطاقات، واختبر ذاكرتك بطريقة تفاعلية.</p></div><div class="intro-icon">▧</div></div>
+          <div class="flash-layout"><div class="flash-main"><div class="flash-meta"><span id="flashCounter">1 / 1</span><span data-i18n="tapToFlip">اضغط على البطاقة لقلبها</span></div><button class="flashcard" id="flashcard"><span class="flash-label" id="flashLabel">السؤال</span><strong id="flashText">ما عاصمة تونس؟</strong><small id="flashHint">اضغط لإظهار الإجابة</small></button><div class="flash-controls"><button class="secondary-button" id="flashPrev">السابق</button><button class="primary-button" id="flashNext">التالي ←</button></div><div class="flash-rating"><span data-i18n="howWell">كيف تذكّرت؟</span><button data-rating="again">أعدها</button><button data-rating="good">جيد</button><button data-rating="easy">سهل</button></div></div><div class="panel add-card-panel"><h3 data-i18n="createCard">أنشئ بطاقة جديدة</h3><p data-i18n="createCardSub">أضف سؤالاً وإجابته إلى مجموعتك الخاصة.</p><label data-i18n="questionLabel">السؤال</label><input id="newCardQuestion" placeholder="اكتب السؤال هنا"><label data-i18n="answerLabel">الإجابة</label><textarea id="newCardAnswer" rows="3" placeholder="اكتب الإجابة هنا"></textarea><button class="primary-button full-button" id="addCardBtn">＋ <span data-i18n="addCard">إضافة بطاقة</span></button><small class="helper-text" data-i18n="savedOnDevice">تُحفظ بطاقاتك على هذا الجهاز.</small></div></div>
+        </section>
+
+        <section class="page" id="page-games">
+          <div class="page-intro"><div><span class="section-kicker" data-i18n="learnPlay">تعلّم واستمتع</span><h1 data-i18n="gamesTitle">ألعاب تعليمية</h1><p data-i18n="gamesDesc">تحديات بسيطة لتنشيط الذاكرة والمنطق والمعلومات العامة.</p></div><div class="intro-icon">♧</div></div>
+          <div class="game-grid"><article class="panel game-card"><div class="game-art memory-art">▦</div><span class="game-tag">MEMORY</span><h3 data-i18n="memoryGame">تحدي الذاكرة</h3><p data-i18n="memoryDesc">طابق البطاقات المتشابهة بأقل عدد من المحاولات.</p><button class="primary-button" id="startMemory">ابدأ اللعب ←</button></article><article class="panel game-card"><div class="game-art math-art">π</div><span class="game-tag">MATH</span><h3 data-i18n="mathGame">تحدي الحساب</h3><p data-i18n="mathDesc">حل مسائل حسابية سريعة وارفع نتيجتك.</p><button class="primary-button" id="startMath">ابدأ التحدي ←</button></article><article class="panel game-card"><div class="game-art word-art">Aa</div><span class="game-tag">WORDS</span><h3 data-i18n="wordGame">تحدي الكلمات</h3><p data-i18n="wordDesc">اختبر مفرداتك ومعاني الكلمات.</p><button class="primary-button" id="startWords">ابدأ التحدي ←</button></article></div>
+          <div class="panel game-stage" id="gameStage"><div class="empty-state"><span>✦</span><h3 data-i18n="chooseGame">اختر لعبة للبدء</h3><p data-i18n="chooseGameSub">ستظهر اللعبة هنا حتى تبقى في مساحة واحدة.</p></div></div>
+        </section>
+
+        <section class="page" id="page-planner">
+          <div class="page-intro"><div><span class="section-kicker" data-i18n="planYourSuccess">خطّط لنجاحك</span><h1 data-i18n="plannerTitle">مخطط الدراسة</h1><p data-i18n="plannerDesc">رتّب مهامك اليومية وتابع ما أنجزته.</p></div><div class="intro-icon">◷</div></div>
+          <div class="planner-layout"><div class="panel task-panel"><div class="panel-heading"><div><h3 data-i18n="taskList">قائمة المهام</h3><p data-i18n="taskSub">إنجازاتك الصغيرة تتراكم</p></div><span class="task-total" id="taskTotal">0 مهام</span></div><form id="taskForm" class="task-form"><input id="taskInput" required maxlength="100" placeholder="مثلاً: مراجعة درس الرياضيات"><input id="taskDate" type="date" aria-label="تاريخ المهمة"><button class="primary-button" type="submit">＋ <span data-i18n="addTask">إضافة</span></button></form><div class="task-filters"><button class="task-filter active" data-task-filter="all">الكل</button><button class="task-filter" data-task-filter="open">قيد التنفيذ</button><button class="task-filter" data-task-filter="done">مكتمل</button></div><div id="taskList" class="task-list"></div></div><div class="panel planner-aside"><div class="calendar-icon">▦</div><h3 data-i18n="studyRhythm">إيقاعك الدراسي</h3><p data-i18n="studyRhythmSub">اختر مهمة واحدة مهمة وابدأ بها قبل الانتقال إلى غيرها.</p><div class="daily-progress"><div><span data-i18n="completionRate">نسبة الإنجاز</span><strong id="completionRate">0%</strong></div><div class="progress-track"><i id="completionBar"></i></div></div></div></div>
+        </section>
+
+        <section class="page" id="page-notes">
+          <div class="page-intro"><div><span class="section-kicker" data-i18n="yourIdeas">أفكارك وملاحظاتك</span><h1 data-i18n="notesTitle">دفتر ملاحظاتي</h1><p data-i18n="notesDesc">احتفظ بالأفكار والملخصات المهمة في مكان واحد.</p></div><div class="intro-icon">▧</div></div>
+          <div class="notes-layout"><div class="panel note-editor"><div class="note-toolbar"><span class="tiny-status">QUICK NOTE</span><span id="noteSaveStatus">الحفظ تلقائي</span></div><input id="noteTitle" placeholder="عنوان الملاحظة"><textarea id="noteContent" rows="13" placeholder="اكتب ملخصك أو فكرتك هنا..."></textarea><div class="note-actions"><button class="secondary-button" id="clearNote">مسح المحرر</button><button class="primary-button" id="saveNote">حفظ الملاحظة</button></div></div><div class="panel note-list-panel"><div class="panel-heading"><div><h3 data-i18n="savedNotes">ملاحظاتي المحفوظة</h3><p data-i18n="savedNotesSub">لا تضيع منك فكرة</p></div><span id="noteCount">0</span></div><div id="notesList" class="notes-list"></div></div></div>
+        </section>
+
+        <section class="page" id="page-tools">
+          <div class="page-intro"><div><span class="section-kicker" data-i18n="workSmarter">ادرس بذكاء أكبر</span><h1 data-i18n="toolsTitle">أدوات الدراسة</h1><p data-i18n="toolsDesc">مؤقت تركيز وآلة حاسبة ومساحة لتنظيم جلساتك.</p></div><div class="intro-icon">⌘</div></div>
+          <div class="tools-grid"><div class="panel pomodoro-panel"><div class="panel-heading"><div><h3 data-i18n="focusTimer">مؤقت التركيز</h3><p data-i18n="pomodoroDesc">طريقة بومودورو — ركّز ثم خذ استراحة.</p></div><span class="tiny-status">POMODORO</span></div><div class="timer-display"><div class="timer-ring" id="timerRing"><div><strong id="timerDisplay">25:00</strong><small id="timerMode">وقت التركيز</small></div></div></div><div class="timer-presets"><button class="preset active" data-minutes="25" data-mode="focus">25 دقيقة</button><button class="preset" data-minutes="5" data-mode="break">5 دقائق</button><button class="preset" data-minutes="15" data-mode="break">15 دقيقة</button></div><div class="timer-actions"><button class="primary-button" id="timerStart">ابدأ</button><button class="secondary-button" id="timerReset">إعادة ضبط</button></div><p class="timer-completed" id="timerMessage"></p></div>
+          <div class="panel calculator-panel"><div class="panel-heading"><div><h3 data-i18n="calculator">آلة حاسبة</h3><p data-i18n="calculatorDesc">عملياتك الحسابية الأساسية.</p></div><span class="calc-symbol">＋</span></div><input id="calcDisplay" class="calc-display" value="0" readonly aria-label="نتيجة الحساب"><div class="calc-grid"><button data-calc="clear" class="calc-clear">AC</button><button data-calc="back">⌫</button><button data-calc="operator">÷</button><button data-calc="operator">×</button><button data-calc="7">7</button><button data-calc="8">8</button><button data-calc="9">9</button><button data-calc="operator">−</button><button data-calc="4">4</button><button data-calc="5">5</button><button data-calc="6">6</button><button data-calc="operator">+</button><button data-calc="1">1</button><button data-calc="2">2</button><button data-calc="3">3</button><button data-calc="equals" class="calc-equals">=</button><button data-calc="0" class="zero-key">0</button><button data-calc=".">.</button></div></div>
+          <div class="panel conversion-panel"><div class="panel-heading"><div><h3 data-i18n="unitConverter">محول الوحدات</h3><p data-i18n="converterDesc">تحويلات بسيطة وسريعة.</p></div><span class="calc-symbol">⇄</span></div><div class="converter-row"><input id="unitValue" type="number" value="1"><select id="unitFrom"><option value="km">كيلومتر</option><option value="m">متر</option><option value="cm">سنتيمتر</option><option value="kg">كيلوغرام</option><option value="g">غرام</option></select></div><div class="converter-row"><span class="convert-equals">=</span><strong id="unitResult">1000</strong><select id="unitTo"><option value="m">متر</option><option value="km">كيلومتر</option><option value="cm">سنتيمتر</option><option value="g">غرام</option><option value="kg">كيلوغرام</option></select></div><small class="helper-text" data-i18n="converterTip">اختر وحدات من نفس النوع لإجراء تحويل صحيح.</small></div>
+          <div class="panel tools-info"><div class="tools-info-icon">✦</div><h3 data-i18n="moreTools">المزيد قادم</h3><p data-i18n="moreToolsDesc">ستتوسع هذه المساحة لتشمل أدوات الرياضيات والعلوم والكتابة والملفات التعليمية.</p></div></div>
+        </section>
+
+        <section class="page" id="page-library">
+          <div class="page-intro"><div><span class="section-kicker" data-i18n="curiosity">مساحة الفضول</span><h1 data-i18n="libraryTitle">مكتبة المعرفة</h1><p data-i18n="libraryDesc">موضوعات تأسيسية مختارة من العلوم والإنسانيات والتقنية.</p></div><div class="intro-icon">▥</div></div>
+          <div class="filter-bar"><label class="filter-search">⌕ <input id="librarySearch" type="search" placeholder="ابحث في المكتبة..."></label><select id="libraryCategory"><option value="all">كل المجالات</option><option>علوم</option><option>تقنية</option><option>رياضيات</option><option>لغات</option><option>إنسانيات</option></select></div><div class="library-grid" id="libraryGrid"></div>
+        </section>
+
+        <section class="page" id="page-settings">
+          <div class="page-intro"><div><span class="section-kicker" data-i18n="personalize">مساحتك الخاصة</span><h1 data-i18n="settingsTitle">الإعدادات</h1><p data-i18n="settingsDesc">خصص تجربة FRIEND SCHOOL بما يناسبك.</p></div><div class="intro-icon">⚙</div></div>
+          <div class="settings-grid"><div class="panel settings-panel"><h3 data-i18n="profileSettings">الملف الشخصي</h3><label data-i18n="yourName">اسمك</label><input id="nameSetting" maxlength="30" placeholder="اكتب اسمك"><label data-i18n="country">الدولة</label><select id="profileCountry"><option>تونس</option><option>الجزائر</option><option>المغرب</option><option>مصر</option><option>السعودية</option><option>فرنسا</option><option>المملكة المتحدة</option><option>الولايات المتحدة</option><option>كندا</option><option>ألمانيا</option><option>اليابان</option><option>الهند</option><option>دولة أخرى</option></select><label data-i18n="studyLevel">المستوى الدراسي</label><select id="profileLevel"><option>ابتدائي</option><option>إعدادي</option><option>ثانوي</option><option>جامعي</option><option>تعلم ذاتي</option></select><button class="primary-button" id="saveProfile">حفظ التغييرات</button></div><div class="panel settings-panel"><h3 data-i18n="appearanceLanguage">المظهر واللغة</h3><label data-i18n="appearance">المظهر</label><div class="setting-choice"><button class="choice-button" data-theme-choice="dark">◐ <span data-i18n="darkMode">داكن</span></button><button class="choice-button" data-theme-choice="light">☼ <span data-i18n="lightMode">فاتح</span></button></div><label data-i18n="interfaceLanguage">لغة الواجهة</label><select id="interfaceLanguage"><option value="ar">العربية</option><option value="en">English</option><option value="fr">Français</option></select><small class="helper-text" data-i18n="languageNote">تتوفر الواجهة حالياً بالعربية والإنجليزية والفرنسية. تُضاف لغات أخرى تدريجياً.</small></div><div class="panel settings-panel"><h3 data-i18n="yourData">بياناتك</h3><p class="settings-description" data-i18n="dataNote">تُحفظ الملاحظات والبطاقات والمهام والإعدادات محلياً داخل متصفح هذا الجهاز. لا يوجد حساب سحابي أو مزامنة بين الأجهزة حالياً.</p><button class="secondary-button" id="exportData">تصدير بياناتي</button><button class="danger-button" id="clearData">حذف البيانات المحلية</button></div><div class="panel settings-panel about-panel"><div class="about-mark">F</div><h3>FRIEND SCHOOL</h3><p data-i18n="aboutText">مساحة تعليمية مجانية قيد البناء، هدفها جعل أدوات التعلم والمعرفة أقرب للجميع.</p><span class="version-label">VERSION 1.0 • FREE</span></div></div>
+        </section>
+
+        <footer class="app-footer"><span>FRIEND SCHOOL</span><span data-i18n="footerText">تعلّم اليوم، واصنع غدك. ✦</span><span data-i18n="freeBadge">مجاني بالكامل</span></footer>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal-backdrop" id="lessonModal" hidden><div class="modal-card"><button class="modal-close" id="closeModal" aria-label="إغلاق">×</button><div class="modal-kicker" id="modalCategory">درس</div><h2 id="modalTitle">عنوان الدرس</h2><p id="modalDescription"></p><div class="lesson-content" id="modalContent"></div><div class="lesson-actions"><button class="secondary-button" id="markLesson">وضع علامة تمت دراسته</button><button class="primary-button" id="lessonQuiz">اختبر فهمك ←</button></div></div></div>
+  <script src="app.js"></script>
+</body>
+</html>
