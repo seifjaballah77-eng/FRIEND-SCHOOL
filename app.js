@@ -90,7 +90,7 @@ const course=courseData.find(c=>c.id===id)||libraryData.find(c=>c.id===id);if(!c
 currentCourse=course;
 const title=course.lesson||course.title;
 const intro=course.summary||course.desc||"اكتشف هذا الموضوع خطوة بخطوة.";
-const explorer=profile.name||"المستكشف";
+const explorer=(profile&&profile.name)||"المستكشف";
 const time=course.time||"15 دقيقة";
 const track=course.track||(course.category==="علوم"?"science":course.category==="تقنية"?"technology":course.category==="رياضيات"?"math":"humanities");
 const trackNames={science:"العلوم الطبيعية والفيزيائية",technology:"التقنية والذكاء الاصطناعي",math:"الرياضيات والمنطق",humanities:"الإنسانيات واللغات"};
