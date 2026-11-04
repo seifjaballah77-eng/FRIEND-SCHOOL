@@ -143,3 +143,91 @@
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+
+/* ===== Readable typography hierarchy & microcopy ===== */
+:root{
+  --font-ar:"Cairo","Tajawal","Noto Sans Arabic",sans-serif;
+  --font-ui:"Inter","Cairo",sans-serif;
+  font-family:var(--font-ar);
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+body,button,input,select,textarea{font-family:var(--font-ar);letter-spacing:0}
+h1,h2,h3,h4,strong,b,label,.primary-button,.secondary-button,.nav-link{
+  text-rendering:optimizeLegibility;
+}
+.page-intro h1,.welcome-banner h1{
+  font-size:clamp(1.65rem,3vw,2.25rem);
+  line-height:1.48;
+  font-weight:900;
+  letter-spacing:-.35px;
+  color:var(--text);
+  text-shadow:0 1px 0 rgba(255,255,255,.035);
+}
+.page-intro p,.welcome-content>p{
+  max-width:660px;
+  margin-top:8px;
+  color:var(--muted);
+  font-size:clamp(12px,1.1vw,14px);
+  font-weight:500;
+  line-height:1.95;
+}
+.section-heading h2,.panel-heading h3,.settings-panel>h3,.game-card h3,
+.library-card h3,.quick-item strong,.stat-card strong{
+  color:var(--text);
+  font-weight:800;
+  line-height:1.65;
+}
+.section-heading h2{font-size:clamp(1.2rem,2vw,1.5rem)}
+.panel-heading h3,.settings-panel>h3,.game-card h3,.library-card h3{font-size:1.02rem}
+.panel-heading p,.game-card p,.library-card p,.settings-description,
+.helper-text,.catalog-note p{
+  color:var(--muted);
+  line-height:1.85;
+  font-size:12px;
+  font-weight:500;
+}
+.section-kicker{
+  color:var(--cyan);
+  font-weight:800;
+  letter-spacing:.15px;
+}
+.nav-link{font-size:12px;font-weight:700;line-height:1.7}
+button,.quick-item,.course-row,.catalog-card{ -webkit-tap-highlight-color:transparent }
+.primary-button,.secondary-button,.full-button{
+  font-weight:800;
+  letter-spacing:0;
+  transition:filter .25s ease,transform .25s ease,box-shadow .25s ease;
+}
+.primary-button:hover,.secondary-button:hover,.full-button:hover{filter:brightness(1.08)}
+.primary-button:active,.secondary-button:active,.full-button:active{transform:translateY(1px) scale(.985)}
+.quick-item strong{font-size:13px}
+.quick-item small{font-size:11px;line-height:1.7;color:var(--muted)}
+.library-level-guide{
+  display:flex;align-items:center;gap:9px;flex-wrap:wrap;
+  margin:0 0 18px;padding:12px 14px;
+  border:1px solid var(--line);border-radius:13px;
+  background:var(--surface);
+}
+.library-level-guide span{color:var(--muted);font-size:11px;font-weight:700;margin-inline-end:4px}
+.library-level-guide strong{
+  padding:6px 11px;border-radius:999px;
+  color:var(--text);background:var(--surface3);
+  border:1px solid var(--line);font-size:11px;font-weight:800;
+}
+.library-card h3{font-size:15px;margin:12px 0 5px}
+.library-card p{font-size:12px;line-height:1.9;min-height:42px}
+.library-card small{display:inline-flex;margin-top:10px;color:var(--cyan);font-size:10px;font-weight:800}
+.filter-bar select,.filter-search input{font-weight:600;color:var(--text)}
+.filter-bar select:focus,.filter-search:focus-within{
+  border-color:rgba(84,217,233,.55);
+  box-shadow:0 0 0 3px rgba(84,217,233,.08),0 0 18px rgba(154,114,255,.08);
+}
+@media(max-width:640px){
+ .page-intro h1,.welcome-banner h1{font-size:1.55rem}
+ .page-intro p,.welcome-content>p{font-size:12px}
+ .library-level-guide{gap:7px}
+ .library-level-guide span{width:100%}
+}
