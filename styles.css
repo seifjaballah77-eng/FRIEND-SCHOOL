@@ -332,3 +332,142 @@ button,.quick-item,.course-row,.catalog-card{ -webkit-tap-highlight-color:transp
 .library-card[data-library-topic]{cursor:pointer}
 .library-card[data-library-topic]:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
 .library-card[data-library-topic]:active{transform:scale(.99)}
+
+
+/* ===== Deep dark canvas, ambient orbs and subject color identities ===== */
+:root{
+  --aura-pink:#ff78bd;
+  --aura-cyan:#55dff0;
+  --aura-gold:#ffc66c;
+  --aura-blue:#668cff;
+  --aura-green:#72e6a4;
+}
+body{
+  background:
+    radial-gradient(ellipse at 12% 8%,rgba(86,65,157,.17),transparent 34%),
+    radial-gradient(ellipse at 88% 78%,rgba(29,117,151,.12),transparent 32%),
+    #080b14;
+}
+body::before,body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+}
+body::before{
+  z-index:0;
+  background:
+    radial-gradient(circle at 8% 14%,rgba(255,91,177,.14),transparent 19rem),
+    radial-gradient(circle at 91% 17%,rgba(67,157,255,.15),transparent 22rem),
+    radial-gradient(circle at 72% 88%,rgba(139,87,255,.14),transparent 24rem),
+    radial-gradient(circle at 28% 78%,rgba(53,212,215,.075),transparent 19rem);
+  background-size:115% 115%;
+  animation:ambient-orb-drift 28s ease-in-out infinite alternate;
+}
+body::after{
+  z-index:0;
+  opacity:.17;
+  background-image:
+    linear-gradient(rgba(166,190,230,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(166,190,230,.07) 1px,transparent 1px);
+  background-size:42px 42px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.7),transparent 92%);
+}
+.app-shell{position:relative;z-index:1}
+@keyframes ambient-orb-drift{
+  0%{background-position:0% 0%,100% 0%,100% 100%,0% 100%}
+  50%{background-position:8% 12%,92% 8%,85% 92%,12% 88%}
+  100%{background-position:15% 5%,85% 15%,92% 85%,5% 95%}
+}
+/* Keep the glass panels readable above the ambient background. */
+.stat-card,.panel,.catalog-card,.library-card,.course-row,.quick-item,
+.game-card,.settings-panel,.flashcard{
+  backdrop-filter:blur(13px);
+}
+.catalog-card h3,.course-row-main strong,.library-card h3,
+.game-card h3,.panel-heading h3{
+  color:var(--text);
+}
+.catalog-card p,.course-row-main small,.library-card p,.game-card p{
+  color:var(--muted);
+}
+/* Glass icon frame with a distinct palette for each subject. */
+.course-art{
+  position:relative;
+  isolation:isolate;
+  border:1px solid currentColor;
+  border-color:color-mix(in srgb,currentColor 38%,transparent);
+  border-radius:15px;
+  background:linear-gradient(145deg,color-mix(in srgb,currentColor 19%,transparent),rgba(255,255,255,.035));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 5px 18px color-mix(in srgb,currentColor 13%,transparent);
+  transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease;
+}
+.art-math{
+  color:#8d9bff;
+  background:linear-gradient(140deg,rgba(83,151,255,.22),rgba(153,104,255,.18));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 5px 20px rgba(89,117,255,.13);
+}
+.art-science{
+  color:#76edb0;
+  background:linear-gradient(140deg,rgba(74,226,156,.2),rgba(67,211,232,.18));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 5px 20px rgba(66,225,183,.13);
+}
+.art-code{
+  color:#70e4f5;
+  background:linear-gradient(140deg,rgba(154,105,255,.22),rgba(63,218,239,.17));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 5px 20px rgba(99,136,255,.13);
+}
+.art-lang{
+  color:#ff9fba;
+  background:linear-gradient(140deg,rgba(255,111,174,.2),rgba(255,174,104,.18));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 5px 20px rgba(255,128,161,.13);
+}
+.art-history,.art-geography{
+  color:#ffd17b;
+  background:linear-gradient(140deg,rgba(255,196,91,.22),rgba(255,143,76,.15));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 5px 20px rgba(255,190,91,.13);
+}
+.catalog-card:hover .course-art,.course-row:hover .course-art,
+.library-card:hover .library-symbol{
+  transform:translateY(-2px) scale(1.045);
+  filter:saturate(1.22);
+}
+.catalog-card:hover .art-math,.course-row:hover .art-math{box-shadow:0 0 22px rgba(106,135,255,.25)}
+.catalog-card:hover .art-science,.course-row:hover .art-science{box-shadow:0 0 22px rgba(76,230,173,.24)}
+.catalog-card:hover .art-code,.course-row:hover .art-code{box-shadow:0 0 22px rgba(80,210,239,.25)}
+.catalog-card:hover .art-lang,.course-row:hover .art-lang{box-shadow:0 0 22px rgba(255,125,169,.24)}
+.catalog-card:hover .art-history,.course-row:hover .art-history{box-shadow:0 0 22px rgba(255,194,91,.25)}
+.library-symbol{
+  display:inline-grid;
+  min-width:42px;
+  min-height:42px;
+  place-items:center;
+  padding:5px 9px;
+  border:1px solid rgba(155,139,255,.3);
+  border-radius:14px;
+  color:#a9b2ff;
+  background:linear-gradient(145deg,rgba(106,132,255,.16),rgba(172,102,255,.12));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 4px 16px rgba(112,126,255,.1);
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.library-card:hover .library-symbol{box-shadow:0 0 20px rgba(103,190,255,.24)}
+/* The light theme keeps the same color identity without a dark canvas. */
+body.light{
+  background:
+    radial-gradient(ellipse at 8% 8%,rgba(180,151,255,.13),transparent 34rem),
+    radial-gradient(ellipse at 92% 82%,rgba(91,211,225,.11),transparent 32rem),
+    #f4f3fa;
+}
+body.light::before{
+  background:
+    radial-gradient(circle at 8% 14%,rgba(255,91,177,.10),transparent 19rem),
+    radial-gradient(circle at 91% 17%,rgba(67,157,255,.10),transparent 22rem),
+    radial-gradient(circle at 72% 88%,rgba(139,87,255,.09),transparent 24rem),
+    radial-gradient(circle at 28% 78%,rgba(53,212,215,.06),transparent 19rem);
+}
+body.light::after{opacity:.10;background-image:linear-gradient(rgba(92,100,140,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(92,100,140,.1) 1px,transparent 1px)}
+body.light .catalog-card h3,body.light .course-row-main strong,
+body.light .library-card h3,body.light .game-card h3{color:#211d38}
+body.light .catalog-card p,body.light .course-row-main small,
+body.light .library-card p,body.light .game-card p{color:#68647c}
+@media(prefers-reduced-motion:reduce){body::before{animation:none}.course-art,.library-symbol{transition:none}}
