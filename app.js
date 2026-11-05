@@ -3694,6 +3694,214 @@ const libraryData = [
 {id:"statistics",title:"مقدمة في الإحصاء والاحتمالات",track:"math",category:"الرياضيات والمنطق",desc:"حلل البيانات وافهم التشتت والاحتمالات والتفسير الإحصائي.",summary:"يوفر الإحصاء أدوات لوصف البيانات والاستدلال منها، بينما تقيس الاحتمالات عدم اليقين. ستتعرف على المتوسط والتشتت والحدث العشوائي وحدود الاستنتاج.",level:"إحصاء",stage:"جامعي",lesson:"مقدمة في الإحصاء والاحتمالات",time:"13 دقيقة",body:"يصف الإحصاء البيانات ويلخصها، ثم يستخدم عينات من المجتمع لدراسة أسئلة أوسع. يبدأ التحليل بفحص نوع البيانات وطريقة جمعها ومدى تمثيل العينة للمجتمع.\n\nالمتوسط الحسابي يساوي مجموع القيم مقسوماً على عددها، بينما يمثل الوسيط القيمة الوسطى بعد ترتيب البيانات. ويصف التباين والانحراف المعياري مقدار انتشار القيم حول المتوسط.\n\nتقيس الاحتمالات مدى إمكانية وقوع حدث. وعندما تكون النتائج متساوية الإمكان، يساوي احتمال الحدث عدد النتائج الملائمة مقسوماً على عدد النتائج الممكنة.\n\nلا يثبت الارتباط وحده وجود علاقة سببية، وقد تتأثر النتائج بتحيز العينة أو طريقة القياس. لذلك ينبغي عرض حجم العينة والافتراضات ومقدار عدم اليقين عند تفسير النتائج."},
 {id:"historical-methods",title:"مناهج البحث التاريخي",track:"humanities",category:"الإنسانيات واللغات",desc:"تعلم نقد المصادر التاريخية ومقارنتها وبناء تفسير مدعوم بالأدلة.",summary:"البحث التاريخي لا يكتفي بسرد الأحداث؛ بل يفحص المصادر وسياقها ويقارن الشهادات لبناء تفسير قابل للمراجعة. ستتعرف على المصدر الأولي والنقد الداخلي والخارجي.",level:"منهجية بحث",stage:"جامعي",lesson:"مناهج البحث التاريخي",time:"12 دقيقة",body:"يبدأ البحث التاريخي بسؤال محدد يساعد على اختيار المصادر والفترة الزمنية والمجال الجغرافي المناسب.\n\nقد يكون المصدر أولياً إذا نشأ في زمن الحدث أو على صلة مباشرة به، مثل رسالة أو سجل أو قطعة أثرية. أما المصدر الثانوي فيحلل الأدلة السابقة ويقدم تفسيراً لها.\n\nيفحص النقد الخارجي أصالة المصدر وتاريخه ومؤلفه وسلامة نسبته، بينما يدرس النقد الداخلي محتواه وغرضه والجمهور الذي وُجه إليه والظروف التي كُتب فيها.\n\nتُقارن المصادر المستقلة وتُرتب الوقائع زمنياً، ثم يبنى التفسير مع التمييز بين ما تثبته الأدلة وما يبقى احتمالاً. ويجب ذكر حدود المصادر وتجنب إسقاط مفاهيم الحاضر على الماضي دون تفسير."}
 ];
+const fullLessonContent = {
+  "brain": {
+    "duration": "30–35 دقيقة",
+    "objectives": [
+      "تحديد موقع الدماغ ضمن الجهاز العصبي وشرح دوره في استقبال المعلومات ومعالجتها.",
+      "تمييز الأجزاء الرئيسية للدماغ ووظيفة كل جزء بصورة مبسطة.",
+      "وصف تركيب الخلية العصبية وكيف تنتقل الإشارات عبر المشابك.",
+      "تفسير كيفية عمل الذاكرة والتعلم واللدونة العصبية.",
+      "اقتراح عادات يومية تساعد على صحة الدماغ والتعلم."
+    ],
+    "introduction": [
+      "تخيل أنك تمشي في الشارع، فتسمع صوت سيارة وتراها تقترب. في لحظات قصيرة تلتقط عيناك وأذناك معلومات، ويفسرها دماغك، ثم ينسق حركة جسمك للابتعاد عن الطريق. لا يحدث ذلك بوعي كامل بكل خطوة؛ فالجهاز العصبي يعمل باستمرار على استقبال المعلومات وتحليلها وتنظيم الاستجابة.",
+      "الدماغ ليس مخزناً للأفكار فقط، بل مركز حيوي يشارك في الحركة والإحساس والانتباه واللغة والتذكر والانفعالات وتنظيم وظائف الجسم. وفي هذا الدرس سننتقل من الصورة العامة إلى الخلايا العصبية، ثم نفهم كيف تتكون الذكريات ولماذا يساعد التدريب والنوم على التعلم."
+    ],
+    "sections": [
+      {
+        "title": "1. الجهاز العصبي: شبكة الاتصال والتحكم",
+        "paragraphs": [
+          "يتكون الجهاز العصبي من الجهاز العصبي المركزي والجهاز العصبي المحيطي. يشمل المركزي الدماغ والنخاع الشوكي، أما المحيطي فيضم الأعصاب التي تصل هذه المراكز بأجزاء الجسم.",
+          "تستقبل المستقبلات الحسية معلومات مثل الضوء والصوت والضغط والحرارة. تنتقل الإشارات عبر الأعصاب إلى الجهاز العصبي المركزي، حيث تُعالج وتُدمج مع معلومات أخرى. ثم قد تصدر أوامر إلى العضلات أو الغدد لتنفيذ استجابة.",
+          "ليست كل الاستجابات متطابقة؛ فبعضها سريع وتلقائي، مثل سحب اليد عند لمس جسم ساخن، وبعضها يتطلب تحليلاً وقراراً واعياً، مثل اختيار طريق مناسب."
+        ],
+        "example": "عندما تلمس شيئاً ساخناً، تلتقط مستقبلات الجلد الحرارة الشديدة. تنتقل إشارة حسية إلى النخاع الشوكي، ويمكن أن تنطلق استجابة انعكاسية سريعة تسحب اليد، بينما يصل الإحساس إلى الدماغ لتدرك ما حدث."
+      },
+      {
+        "title": "2. الأجزاء الرئيسية للدماغ",
+        "paragraphs": [
+          "المخ هو أكبر أجزاء الدماغ، ويشارك في التفكير الواعي والإدراك واللغة والذاكرة وتفسير كثير من المعلومات الحسية والتحكم في الحركات الإرادية. ويتكون سطحه من نصفي كرة مخية، لكل منهما مناطق متخصصة تعمل ضمن شبكات مترابطة.",
+          "المخيخ يقع في الجزء الخلفي السفلي من الدماغ، ويساعد على تنسيق الحركات وضبط التوازن ودقة الحركة وتعلم بعض المهارات الحركية. لا يبدأ الحركة وحده، بل يساهم في جعلها أكثر سلاسة وتناسقاً.",
+          "جذع الدماغ يصل الدماغ بالنخاع الشوكي، ويشارك في تنظيم وظائف أساسية مثل التنفس ومعدل ضربات القلب واليقظة والبلع. لذلك تعد إصاباته خطيرة.",
+          "توجد أيضاً تراكيب عميقة، منها الحُصين الذي يؤدي دوراً مهماً في تكوين ذكريات جديدة، واللوزة الدماغية التي تشارك في معالجة الانفعالات، ومنها الخوف. هذه الوظائف لا تعمل بمعزل عن بقية الدماغ."
+        ],
+        "example": "عندما تتعلم ركوب الدراجة، تستخدم مناطق متعددة: المخ لمعالجة المعلومات واتخاذ القرار، والمخيخ للمساعدة في التوازن وتنسيق الحركة، وشبكات أخرى للانتباه وتذكر المهارة."
+      },
+      {
+        "title": "3. الخلية العصبية: وحدة نقل المعلومات",
+        "paragraphs": [
+          "الخلية العصبية، أو العصبون، خلية متخصصة في استقبال المعلومات ونقلها. يتضمن تركيبها جسم الخلية الذي يحتوي على النواة، وتفرعات شجرية تستقبل إشارات من خلايا أخرى، ومحوراً عصبياً ينقل الإشارة بعيداً عن جسم الخلية.",
+          "تغلف الميالين بعض المحاور العصبية، وتعمل هذه الطبقة العازلة على زيادة سرعة انتقال الإشارة. توجد فجوات صغيرة بين أجزاء غمد الميالين تسمى عقد رانفييه، ويساعد وجودها على انتقال سريع للإشارة على طول المحور.",
+          "تختلف الخلايا العصبية في الشكل والوظيفة. فالعصبونات الحسية تنقل معلومات من المستقبلات إلى الجهاز العصبي المركزي، والحركية تنقل أوامر إلى العضلات والغدد، والموصلة تربط بين عصبونات داخل الجهاز العصبي المركزي."
+        ],
+        "example": "فكر في العصبون كأنه محطة اتصال: تستقبل التفرعات الرسائل، ويجمع جسم الخلية الإشارات، ثم ينقل المحور العصبي رسالة إلى خلية أخرى أو إلى عضلة."
+      },
+      {
+        "title": "4. كيف تنتقل الرسالة العصبية؟",
+        "paragraphs": [
+          "تحافظ الخلية العصبية على فرق في الشحنة الكهربائية بين داخلها وخارجها. عندما يصل التنبيه إلى مستوى مناسب، يتولد جهد فعل؛ وهو تغير كهربائي سريع ينتشر على طول المحور العصبي.",
+          "عند نهاية المحور تصل الإشارة إلى منطقة تسمى المشبك العصبي. في كثير من المشابك الكيميائية، يؤدي وصول جهد الفعل إلى إفراز نواقل عصبية في الفراغ المشبكي. ترتبط هذه المواد بمستقبلات على الخلية التالية، وقد تزيد احتمال نشاطها أو تقلله.",
+          "من النواقل العصبية المعروفة الأستيل كولين والدوبامين والسيروتونين والغلوتامات وGABA. لكل ناقل وظائف متعددة بحسب موقعه والمستقبلات التي يتفاعل معها؛ لذلك لا يصح اختزال ناقل واحد في وصف مثل مادة السعادة أو مادة الذكاء."
+        ],
+        "example": "يمكن تشبيه المشبك بممر بين محطتين: تصل الإشارة كهربائياً إلى نهاية الخلية الأولى، ثم تعبر غالباً بواسطة مواد كيميائية إلى الخلية التالية، فتبدأ فيها استجابة جديدة."
+      },
+      {
+        "title": "5. الحواس والانتباه ومعالجة المعلومات",
+        "paragraphs": [
+          "لا يرى الدماغ العالم كما تراه العين مباشرة؛ بل يستقبل إشارات عصبية ناتجة عن تحويل الضوء والصوت والضغط والمواد الكيميائية إلى نشاط عصبي. وتُعالج هذه الإشارات في شبكات متخصصة ثم تتكامل لتكوين إدراك متماسك.",
+          "الانتباه يساعد على اختيار جزء من المعلومات للتركيز عليه. فعندما تقرأ في مكان مزدحم، قد تحاول تجاهل الأصوات المحيطة وتوجيه انتباهك إلى الكلمات. لكن الانتباه محدود، والتنقل المتكرر بين المهام قد يجعل التعلم أبطأ وأكثر عرضة للأخطاء.",
+          "تتأثر طريقة تفسير المعلومات بالخبرة السابقة والتوقعات والسياق. ولهذا قد يفسر شخصان الموقف نفسه بطرق مختلفة، كما قد تخدعنا بعض الأوهام البصرية."
+        ],
+        "example": "انظر إلى كلمة في صفحة مزدحمة وحاول التركيز عليها فقط لمدة نصف دقيقة. ستلاحظ أن توجيه الانتباه يساعدك على التقاط تفاصيل ربما لم تكن تلاحظها عند النظر السريع."
+      },
+      {
+        "title": "6. الذاكرة: من المعلومة إلى التذكر",
+        "paragraphs": [
+          "الذاكرة ليست صندوقاً واحداً. تستخدم الذاكرة العاملة للاحتفاظ بقدر محدود من المعلومات ومعالجتها لوقت قصير، مثل تذكر رقم مؤقتاً أثناء كتابته أو متابعة خطوات مسألة.",
+          "تضم الذاكرة طويلة الأمد معارف وحقائق وأحداثاً ومهارات. فالذاكرة التصريحية تشمل ما نستطيع وصفه بالكلمات، مثل عاصمة دولة أو ذكرى رحلة. أما الذاكرة الإجرائية فتساعد على أداء مهارات مثل ركوب الدراجة أو الكتابة على لوحة المفاتيح.",
+          "يتطلب تكوين ذكرى جديدة تغيرات في نشاط الشبكات العصبية، ويسهم الحُصين في تنظيم تكوين كثير من الذكريات التصريحية الجديدة. ومع مرور الوقت قد تصبح بعض الذكريات أكثر اعتماداً على شبكات موزعة في القشرة المخية.",
+          "التذكر ليس تسجيلاً حرفياً دائماً؛ فقد تتغير تفاصيل الذكرى عند استدعائها، وتتأثر بالمعلومات الجديدة والسياق. لذلك من المهم التمييز بين ما نتذكره وما نستطيع التحقق منه."
+        ],
+        "example": "إذا قرأت تعريفاً مرة واحدة فقد تنساه سريعاً. أما إذا حاولت استرجاعه من الذاكرة، ثم راجعته بعد يوم وبعد عدة أيام، فغالباً ستقوي فرص الاحتفاظ به."
+      },
+      {
+        "title": "7. كيف يتعلم الدماغ؟ اللدونة العصبية",
+        "paragraphs": [
+          "اللدونة العصبية هي قدرة الجهاز العصبي على تغيير قوة الاتصالات بين الخلايا العصبية، وأحياناً تنظيم بنيته ووظائفه، استجابة للتجربة والتدريب والتعلم أو بعد الإصابة.",
+          "عندما تنشط مجموعات من الخلايا معاً بصورة متكررة ضمن نمط ذي معنى، قد تقوى بعض الاتصالات بينها أو تضعف اتصالات أخرى. وتشارك آليات خلوية وجزيئية متعددة في هذه التغيرات؛ وليست كل ممارسة تؤدي تلقائياً إلى التحسن، إذ تؤثر جودة التدريب والتغذية الراجعة والراحة.",
+          "التدريب المتعمد يعني تقسيم المهارة إلى أجزاء، والعمل على الجزء الصعب، والحصول على ملاحظات، ثم إعادة المحاولة. أما التكرار المتباعد فيوزع المراجعة على أيام بدلاً من حشرها في جلسة واحدة.",
+          "الخطأ جزء طبيعي من التعلم إذا فهمنا سببه وصححناه. لذلك لا تكتف بإعادة قراءة الصفحة؛ أغلق الكتاب وحاول حل سؤال أو شرح الفكرة بكلماتك."
+        ],
+        "example": "لتعلم مفردات لغة جديدة، راجع مجموعة صغيرة اليوم، واختبر نفسك غداً، ثم بعد ثلاثة أيام وأسبوع. حاول إنتاج جملة من كل كلمة بدلاً من الاكتفاء بالنظر إليها."
+      },
+      {
+        "title": "8. النوم وصحة الدماغ",
+        "paragraphs": [
+          "النوم عملية بيولوجية نشطة يمر خلالها الدماغ بمراحل مختلفة. يرتبط النوم بتنظيم الانتباه والمزاج والتعلم، ويساعد على تثبيت بعض الذكريات ومعالجة ما اكتسبناه خلال اليقظة.",
+          "قلة النوم قد تضعف التركيز وسرعة الاستجابة والقدرة على تذكر المعلومات وتنظيم الانفعالات. لذلك فإن السهر طوال الليل قبل الاختبار ليس بديلاً جيداً عن المراجعة الموزعة والنوم الكافي.",
+          "تدعم صحة الدماغ عادات عامة مثل النشاط البدني المنتظم، والغذاء المتوازن، وشرب الماء، والنوم وفق مواعيد مستقرة، والتعلم المستمر، والعلاقات الاجتماعية الجيدة. كما ينبغي حماية الرأس من الإصابات وطلب المساعدة الطبية عند ظهور أعراض مقلقة."
+        ],
+        "example": "قارن بين مذاكرة قصيرة يتبعها نوم جيد، ومذاكرة مرهقة طوال الليل. دوّن في اليوم التالي مدى قدرتك على التركيز واسترجاع المعلومات، دون اعتبار تجربة واحدة دليلاً علمياً قاطعاً."
+      }
+    ],
+    "misconceptions": [
+      [
+        "الدماغ لا يستخدم إلا 10% من قدرته",
+        "هذه مقولة شائعة غير صحيحة؛ فمناطق الدماغ المختلفة تنشط بحسب المهمة، ويؤدي الدماغ وظائف كثيرة حتى أثناء الراحة والنوم."
+      ],
+      [
+        "كل شخص يستخدم نصف دماغه الأيمن أو الأيسر فقط",
+        "يوجد اختلاف في بعض التخصصات الوظيفية بين نصفي الدماغ، لكن التفكير والتعلم والمهارات اليومية تعتمد غالباً على شبكات موزعة في الجانبين."
+      ],
+      [
+        "الذاكرة تعمل مثل كاميرا تصور كل شيء",
+        "الذاكرة انتقائية وقابلة للتغير، وقد تتأثر بالتوقعات والمعلومات اللاحقة."
+      ],
+      [
+        "التعلم يجب أن يكون سهلاً دائماً",
+        "قد يتطلب التعلم جهداً وتركيزاً وأخطاء وتصحيحاً. المهم أن يكون التحدي مناسباً وأن تتوفر المراجعة والراحة."
+      ]
+    ],
+    "activity": {
+      "title": "نشاط تطبيقي: اختبر أثر الاسترجاع المتباعد",
+      "materials": "ورقة، قلم، وستة مصطلحات من الدرس.",
+      "steps": [
+        "اختر ستة مصطلحات، مثل: العصبون، المشبك، المخيخ، الحُصين، الذاكرة العاملة، اللدونة العصبية.",
+        "اقرأ تعريف كل مصطلح مرة واحدة، ثم أغلق الدرس واكتب ما تتذكره دون النظر.",
+        "افتح الدرس وصحح إجاباتك بلون مختلف، وحدد المصطلحات التي تحتاج إلى مراجعة.",
+        "بعد يوم، حاول كتابة التعريفات من الذاكرة مرة أخرى.",
+        "بعد ثلاثة أيام، اختبر نفسك مرة ثالثة وقارن عدد الإجابات الصحيحة."
+      ],
+      "observation": "سجل عدد الإجابات الصحيحة في كل محاولة. قد تلاحظ تحسناً مع المراجعة، لكن النتيجة تختلف بحسب صعوبة المصطلحات والانتباه والنوم وطريقة التدريب.",
+      "safety": "هذا نشاط تعليمي بسيط لملاحظة أسلوب المراجعة، وليس تجربة طبية أو اختباراً لقدرات الدماغ."
+    },
+    "glossary": [
+      [
+        "الجهاز العصبي",
+        "شبكة تضم الدماغ والنخاع الشوكي والأعصاب وتنسق استقبال المعلومات والاستجابة."
+      ],
+      [
+        "العصبون",
+        "خلية متخصصة في استقبال الإشارات العصبية ونقلها."
+      ],
+      [
+        "المحور العصبي",
+        "امتداد ينقل الإشارة بعيداً عن جسم الخلية العصبية."
+      ],
+      [
+        "المشبك العصبي",
+        "منطقة اتصال وظيفي تنتقل عبرها الإشارة من خلية إلى أخرى."
+      ],
+      [
+        "الناقل العصبي",
+        "مادة كيميائية تساعد على نقل الإشارة عبر كثير من المشابك."
+      ],
+      [
+        "الحُصين",
+        "تركيب دماغي مهم في تكوين كثير من الذكريات الجديدة."
+      ],
+      [
+        "الذاكرة العاملة",
+        "نظام يحتفظ مؤقتاً بالمعلومات ويعالجها أثناء أداء مهمة."
+      ],
+      [
+        "اللدونة العصبية",
+        "قدرة الجهاز العصبي على تغيير الاتصالات والوظائف استجابة للخبرة."
+      ],
+      [
+        "التكرار المتباعد",
+        "توزيع جلسات المراجعة على فترات زمنية بدلاً من حشرها في وقت واحد."
+      ]
+    ],
+    "questions": [
+      {
+        "q": "أي جزء من الجهاز العصبي المركزي يصل الدماغ بالنخاع الشوكي ويساهم في تنظيم التنفس؟",
+        "a": "جذع الدماغ."
+      },
+      {
+        "q": "ما وظيفة التفرعات الشجرية في الخلية العصبية؟",
+        "a": "استقبال الإشارات من خلايا أخرى ونقلها باتجاه جسم الخلية."
+      },
+      {
+        "q": "ماذا يحدث غالباً في المشبك الكيميائي؟",
+        "a": "تُفرز نواقل عصبية تعبر الشق المشبكي وترتبط بمستقبلات في الخلية التالية."
+      },
+      {
+        "q": "ما الفرق بين الذاكرة العاملة والذاكرة طويلة الأمد؟",
+        "a": "الذاكرة العاملة تحتفظ مؤقتاً بمعلومات وتعالجها، أما طويلة الأمد فتحتفظ بمعارف أو أحداث أو مهارات لفترات أطول."
+      },
+      {
+        "q": "ما المقصود باللدونة العصبية؟",
+        "a": "قدرة الجهاز العصبي على تعديل قوة اتصالاته وبعض وظائفه وبنيته استجابة للخبرة والتعلم."
+      },
+      {
+        "q": "اذكر سببين يجعلان السهر طوال الليل قبل الاختبار خياراً غير مناسب.",
+        "a": "لأن قلة النوم قد تضعف الانتباه والاسترجاع وتنظيم الانفعالات، ولأن المراجعة الموزعة مع نوم كافٍ أنسب لتثبيت التعلم."
+      }
+    ],
+    "conclusion": "يعمل الدماغ ضمن شبكة عصبية متكاملة: تستقبل الحواس المعلومات، وتنقلها الخلايا العصبية، وتعالجها شبكات متخصصة، ثم تنسق الاستجابات. وتتغير هذه الشبكات مع الخبرة والتدريب، فتتيح التعلم وتكوين الذكريات. فهم هذه العملية يساعدك على اختيار طرق تعلم أفضل: الانتباه، والاسترجاع النشط، والمراجعة المتباعدة، والنوم الكافي.",
+    "takeaways": [
+      "الدماغ جزء من الجهاز العصبي المركزي ويعمل مع النخاع الشوكي والأعصاب.",
+      "الخلايا العصبية تتواصل بإشارات كهربائية وكيميائية عبر المشابك.",
+      "المخ والمخيخ وجذع الدماغ تؤدي وظائف مختلفة ومتكاملة.",
+      "الذاكرة أنواع متعددة وليست تسجيلاً حرفياً لكل ما نراه.",
+      "اللدونة العصبية تفسر جانباً مهماً من التعلم والتغير مع التدريب.",
+      "النوم والراحة والممارسة المتباعدة تدعم التعلم وصحة الدماغ."
+    ]
+  }
+};
+
+function renderCompleteLesson(course,lesson,trackName,title,explorer,time){
+const sectionMarkup=lesson.sections.map((section,i)=>'<article class="complete-lesson-section"><div class="complete-section-number">'+String(i+1).padStart(2,"0")+'</div><div class="complete-section-content"><h3>'+safeText(section.title)+'</h3>'+section.paragraphs.map(p=>'<p>'+safeText(p)+'</p>').join("")+(section.example?'<div class="complete-example"><strong>مثال من الحياة اليومية</strong><p>'+safeText(section.example)+'</p></div>':"")+'</div></article>').join("");
+const objectiveMarkup=lesson.objectives.map(x=>'<li>'+safeText(x)+'</li>').join("");
+const misconceptionMarkup=lesson.misconceptions.map(x=>'<article class="complete-misconception"><h4>'+safeText(x[0])+'</h4><p>'+safeText(x[1])+'</p></article>').join("");
+const activityMarkup=lesson.activity.steps.map((x,i)=>'<li><span>'+String(i+1).padStart(2,"0")+'</span>'+safeText(x)+'</li>').join("");
+const glossaryMarkup=lesson.glossary.map(x=>'<div class="complete-glossary-item"><dt>'+safeText(x[0])+'</dt><dd>'+safeText(x[1])+'</dd></div>').join("");
+const questionMarkup=lesson.questions.map((x,i)=>'<details class="complete-review-question"><summary><span>'+String(i+1).padStart(2,"0")+'</span>'+safeText(x.q)+'</summary><p>'+safeText(x.a)+'</p></details>').join("");
+const takeawayMarkup=lesson.takeaways.map(x=>'<li>'+safeText(x)+'</li>').join("");
+return '<div class="knowledge-page complete-lesson"><div class="knowledge-top"><button class="knowledge-back" id="knowledgeBack">← العودة</button><span>FRIEND SCHOOL · درس متكامل</span></div><header class="knowledge-hero"><div class="knowledge-eyebrow">'+safeText(trackName)+' · درس علمي موسّع</div><h1>'+safeText(title)+'</h1><div class="knowledge-meta"><span>المرحلة: '+safeText(course.stage||course.level||"تعلم ذاتي")+'</span><span>المدة: '+safeText(lesson.duration||time)+'</span><span>المتعلم: '+safeText(explorer)+'</span></div></header><section class="knowledge-quicktake"><div class="knowledge-quick-label">الفكرة الأساسية</div><p>'+safeText(course.summary||course.desc||"")+'</p></section><section class="complete-objectives"><h2>ماذا ستتعلم؟</h2><ul>'+objectiveMarkup+'</ul></section><nav class="knowledge-toc"><a href="#complete-intro">المقدمة</a><a href="#complete-explanation">الشرح الكامل</a><a href="#complete-misconceptions">مفاهيم شائعة</a><a href="#complete-activity">نشاط تطبيقي</a><a href="#complete-glossary">المصطلحات</a><a href="#complete-review">أسئلة المراجعة</a><a href="#complete-conclusion">الخلاصة</a></nav><section class="knowledge-section" id="complete-intro"><div class="knowledge-section-head"><span>01</span><div><small>INTRODUCTION</small><h2>مقدمة الدرس</h2></div></div>'+lesson.introduction.map(p=>'<p>'+safeText(p)+'</p>').join("")+'</section><section class="knowledge-section" id="complete-explanation"><div class="knowledge-section-head"><span>02</span><div><small>FULL EXPLANATION</small><h2>الشرح العلمي المفصل</h2></div></div><div class="complete-lesson-sections">'+sectionMarkup+'</div></section><section class="knowledge-section" id="complete-misconceptions"><div class="knowledge-section-head"><span>03</span><div><small>CHECK YOUR UNDERSTANDING</small><h2>أفكار شائعة تحتاج إلى تصحيح</h2></div></div>'+misconceptionMarkup+'</section><section class="knowledge-section" id="complete-activity"><div class="knowledge-section-head"><span>04</span><div><small>LEARNING ACTIVITY</small><h2>'+safeText(lesson.activity.title)+'</h2></div></div><p><strong>الأدوات:</strong> '+safeText(lesson.activity.materials)+'</p><ol class="complete-activity-steps">'+activityMarkup+'</ol><div class="complete-example"><strong>ماذا تلاحظ؟</strong><p>'+safeText(lesson.activity.observation)+'</p><p>'+safeText(lesson.activity.safety)+'</p></div></section><section class="knowledge-section" id="complete-glossary"><div class="knowledge-section-head"><span>05</span><div><small>KEY TERMS</small><h2>قاموس المصطلحات</h2></div></div><dl class="complete-glossary">'+glossaryMarkup+'</dl></section><section class="knowledge-section" id="complete-review"><div class="knowledge-section-head"><span>06</span><div><small>SELF ASSESSMENT</small><h2>أسئلة الفهم والمراجعة</h2></div></div><p>حاول الإجابة قبل فتح كل إجابة. اضغط على السؤال لإظهار التصحيح.</p>'+questionMarkup+'</section><section class="knowledge-section" id="complete-conclusion"><div class="knowledge-section-head"><span>07</span><div><small>CONCLUSION</small><h2>الخاتمة والخلاصة</h2></div></div><p>'+safeText(lesson.conclusion)+'</p><h3>أهم ما ينبغي أن تتذكره</h3><ul class="complete-takeaways">'+takeawayMarkup+'</ul></section></div>';
+}
 const questions = [
  {q:"ما ناتج 7 × 8؟",o:["54","56","64","48"],a:1,e:"7 × 8 = 56."},
  {q:"ما الغاز الذي تمتصه النباتات في عملية البناء الضوئي؟",o:["الأكسجين","النيتروجين","ثاني أكسيد الكربون","الهيدروجين"],a:2,e:"تمتص النباتات ثاني أكسيد الكربون وتستخدم الماء والضوء لصنع المواد العضوية."},
@@ -3875,6 +4083,8 @@ const course=courseData.find(c=>c.id===id)||gradeCourses.find(c=>c.id===id)||adv
 currentCourse=course;
 const title=course.isOfficialCurriculum?courseDisplayTitle(course):(course.lesson||course.title);
 const intro=course.summary||course.desc||"اكتشف هذا الموضوع خطوة بخطوة.";
+const fullLesson=fullLessonContent[course.id]||null;
+if(fullLesson)course.time=fullLesson.duration;
 const explorer=(profile&&profile.name)||"المستكشف";
 const time=course.time||"15 دقيقة";
 const track=course.track||(course.category==="علوم"?"science":course.category==="تقنية"?"technology":course.category==="رياضيات"?"math":"humanities");
@@ -3905,7 +4115,8 @@ const methodMarkup=methodSteps.map(step=>'<li>'+safeText(step)+'</li>').join("")
 $("#modalCategory").textContent=trackName+" · "+(course.stage||course.level||"تعلم ذاتي")+(course.isOfficialCurriculum?" · "+course.section:course.isAdvancedFramework?" · مسار أكاديمي عام":"")+" · "+time;
 $("#modalTitle").textContent=title;
 $("#modalDescription").textContent=intro;
-$("#modalContent").innerHTML='<div class="knowledge-page"><div class="knowledge-top"><button class="knowledge-back" id="knowledgeBack">← العودة</button><span>FRIEND SCHOOL · KNOWLEDGE</span></div><header class="knowledge-hero"><div class="knowledge-eyebrow">'+safeText(trackName)+' · رحلة استكشاف</div><h1>'+safeText(title)+'</h1><div class="knowledge-meta"><span>المرحلة: '+safeText(course.stage||course.level||"تعلم ذاتي")+'</span>'+(course.isOfficialCurriculum?'<span>الشعبة: '+safeText(course.section)+'</span>':"")+'<span>المدة المقترحة: '+safeText(time)+'</span><span>المستكشف: '+safeText(explorer)+'</span></div></header><section class="knowledge-quicktake"><div class="knowledge-quick-label">QUICK TAKE · الملخص السريع</div><p>'+safeText(intro)+'</p></section><nav class="knowledge-toc"><a href="#knowledge-intro">المقدمة</a><a href="#knowledge-details">الشرح خطوة بخطوة</a><a href="#knowledge-method">طريقة العمل</a><a href="#knowledge-explore">وقت الاستكشاف</a><a href="#knowledge-end">الخاتمة</a></nav><section class="knowledge-section" id="knowledge-intro"><div class="knowledge-section-head"><span>01</span><div><small>START HERE</small><h2>مقدمة الموضوع</h2></div></div><p>'+safeText(course.desc||intro)+'</p></section><section class="knowledge-section" id="knowledge-details"><div class="knowledge-section-head"><span>02</span><div><small>STEP BY STEP</small><h2>'+safeText(detailHeading)+'</h2></div></div><ol class="knowledge-step-list">'+stepMarkup+'</ol></section><section class="knowledge-section" id="knowledge-method"><div class="knowledge-section-head"><span>03</span><div><small>HOW IT WORKS</small><h2>طريقة العمل والفهم</h2></div></div><ol class="knowledge-method-list">'+methodMarkup+'</ol><div class="knowledge-tip"><strong>طريقة ذكية للتعلّم</strong><p>بعد الانتهاء، حاول شرح الفكرة دون النظر إلى النص، ثم راجع النقاط التي نسيتها.</p></div></section><section class="knowledge-section knowledge-explore" id="knowledge-explore"><div class="knowledge-section-head"><span>04</span><div><small>YOUR DISCOVERY</small><h2>وقت الاستكشاف</h2></div></div><div class="explore-stats"><div><strong>'+safeText(time)+'</strong><small>الوقت المقترح</small></div><div><strong>'+safeText(explorer)+'</strong><small>المستكشف</small></div><div><strong>'+(course.hasTerms?(course.chapterCount||steps.length):steps.length)+'</strong><small>'+(course.isOfficialCurriculum&&!course.hasTextbookChapters?"محاور مقترحة":course.hasTerms?"فصول ووحدات المادة":"نقاط الشرح")+'</small></div></div><h3>مهمتك الاستكشافية</h3><p>اكتب سؤالاً واحداً أثاره هذا الموضوع، وابحث عن مثال واقعي يجيب عنه. ثم لخّص أهم ما اكتشفته في ثلاث جمل.</p></section><section class="knowledge-section" id="knowledge-end"><div class="knowledge-section-head"><span>05</span><div><small>TAKEAWAY</small><h2>الخاتمة وما تعلمته</h2></div></div><p>أصبحت لديك بداية منظمة لفهم «'+safeText(title)+'». راجع النقاط الأساسية، وتحقق من المعلومات، وجرّب تطبيق ما تعلمته في مثال جديد.</p>'+(course.isOfficialCurriculum?'<div class="knowledge-source-note">'+safeText("مصدر عناوين المواد والفصول: مرجع المنهج التونسي وفهارس الكتب المدرسية للمركز الوطني البيداغوجي CNP. التقسيم إلى ثلاثيات داخل التطبيق مقترح حسب ترتيب الفصول، ولا يعني أن الوزارة اعتمدت هذا التوزيع التفصيلي. يعرض المرجع عناوين الفصول ولا يتضمن نصوص الكتب أو تمارينها الأصلية؛ والمحاور الموسومة بأنها مقترحة هي مواد دعم إضافية وليست عناوين رسمية.")+'<br><span>'+safeText("Tunisian Official Curriculum dataset · CC BY 4.0 · Israaelhouch (2026)")+'</span></div>':course.isAdvancedFramework?'<div class="knowledge-source-note">'+safeText("هذا مسار أكاديمي عام مقترح للتوجيه والتعلم الذاتي، وليس خطة رسمية لجامعة أو دولة. تختلف المواد وعدد الفصول ونظام الدراسة بين المؤسسات والتخصصات.")+'</div>':"")+'</section></div>';
+const standardLessonMarkup='<div class="knowledge-page"><div class="knowledge-top"><button class="knowledge-back" id="knowledgeBack">← العودة</button><span>FRIEND SCHOOL · KNOWLEDGE</span></div><header class="knowledge-hero"><div class="knowledge-eyebrow">'+safeText(trackName)+' · رحلة استكشاف</div><h1>'+safeText(title)+'</h1><div class="knowledge-meta"><span>المرحلة: '+safeText(course.stage||course.level||"تعلم ذاتي")+'</span>'+(course.isOfficialCurriculum?'<span>الشعبة: '+safeText(course.section)+'</span>':"")+'<span>المدة المقترحة: '+safeText(time)+'</span><span>المستكشف: '+safeText(explorer)+'</span></div></header><section class="knowledge-quicktake"><div class="knowledge-quick-label">QUICK TAKE · الملخص السريع</div><p>'+safeText(intro)+'</p></section><nav class="knowledge-toc"><a href="#knowledge-intro">المقدمة</a><a href="#knowledge-details">الشرح خطوة بخطوة</a><a href="#knowledge-method">طريقة العمل</a><a href="#knowledge-explore">وقت الاستكشاف</a><a href="#knowledge-end">الخاتمة</a></nav><section class="knowledge-section" id="knowledge-intro"><div class="knowledge-section-head"><span>01</span><div><small>START HERE</small><h2>مقدمة الموضوع</h2></div></div><p>'+safeText(course.desc||intro)+'</p></section><section class="knowledge-section" id="knowledge-details"><div class="knowledge-section-head"><span>02</span><div><small>STEP BY STEP</small><h2>'+safeText(detailHeading)+'</h2></div></div><ol class="knowledge-step-list">'+stepMarkup+'</ol></section><section class="knowledge-section" id="knowledge-method"><div class="knowledge-section-head"><span>03</span><div><small>HOW IT WORKS</small><h2>طريقة العمل والفهم</h2></div></div><ol class="knowledge-method-list">'+methodMarkup+'</ol><div class="knowledge-tip"><strong>طريقة ذكية للتعلّم</strong><p>بعد الانتهاء، حاول شرح الفكرة دون النظر إلى النص، ثم راجع النقاط التي نسيتها.</p></div></section><section class="knowledge-section knowledge-explore" id="knowledge-explore"><div class="knowledge-section-head"><span>04</span><div><small>YOUR DISCOVERY</small><h2>وقت الاستكشاف</h2></div></div><div class="explore-stats"><div><strong>'+safeText(time)+'</strong><small>الوقت المقترح</small></div><div><strong>'+safeText(explorer)+'</strong><small>المستكشف</small></div><div><strong>'+(course.hasTerms?(course.chapterCount||steps.length):steps.length)+'</strong><small>'+(course.isOfficialCurriculum&&!course.hasTextbookChapters?"محاور مقترحة":course.hasTerms?"فصول ووحدات المادة":"نقاط الشرح")+'</small></div></div><h3>مهمتك الاستكشافية</h3><p>اكتب سؤالاً واحداً أثاره هذا الموضوع، وابحث عن مثال واقعي يجيب عنه. ثم لخّص أهم ما اكتشفته في ثلاث جمل.</p></section><section class="knowledge-section" id="knowledge-end"><div class="knowledge-section-head"><span>05</span><div><small>TAKEAWAY</small><h2>الخاتمة وما تعلمته</h2></div></div><p>أصبحت لديك بداية منظمة لفهم «'+safeText(title)+'». راجع النقاط الأساسية، وتحقق من المعلومات، وجرّب تطبيق ما تعلمته في مثال جديد.</p>'+(course.isOfficialCurriculum?'<div class="knowledge-source-note">'+safeText("مصدر عناوين المواد والفصول: مرجع المنهج التونسي وفهارس الكتب المدرسية للمركز الوطني البيداغوجي CNP. التقسيم إلى ثلاثيات داخل التطبيق مقترح حسب ترتيب الفصول، ولا يعني أن الوزارة اعتمدت هذا التوزيع التفصيلي. يعرض المرجع عناوين الفصول ولا يتضمن نصوص الكتب أو تمارينها الأصلية؛ والمحاور الموسومة بأنها مقترحة هي مواد دعم إضافية وليست عناوين رسمية.")+'<br><span>'+safeText("Tunisian Official Curriculum dataset · CC BY 4.0 · Israaelhouch (2026)")+'</span></div>':course.isAdvancedFramework?'<div class="knowledge-source-note">'+safeText("هذا مسار أكاديمي عام مقترح للتوجيه والتعلم الذاتي، وليس خطة رسمية لجامعة أو دولة. تختلف المواد وعدد الفصول ونظام الدراسة بين المؤسسات والتخصصات.")+'</div>':"")+'</section></div>';
+$("#modalContent").innerHTML=fullLesson?renderCompleteLesson(course,fullLesson,trackName,title,explorer,time):standardLessonMarkup;
 $("#lessonModal").hidden=false;
 $("#knowledgeBack").addEventListener("click",closeLesson);
 $("#modalContent").querySelectorAll(".knowledge-toc a").forEach(link=>link.addEventListener("click",e=>{e.preventDefault();const target=$(link.getAttribute("href"));if(target)target.scrollIntoView({behavior:"smooth",block:"start"});}));
