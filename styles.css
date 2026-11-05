@@ -603,3 +603,32 @@ body[dir="ltr"] #lessonModal .modal-close{left:auto;right:14px}
 
 /* Curriculum catalogue: readable period, grade and section filters */
 .curriculum-filter-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px}.curriculum-filter-bar .filter-search{flex:1 1 210px;min-width:180px}.curriculum-filter-bar select{flex:1 1 145px;min-height:42px;max-width:100%}.catalog-meta{gap:8px;align-items:flex-start;flex-wrap:wrap}.catalog-meta span{line-height:1.7;max-width:78%}.no-results.curriculum-hint{grid-column:1/-1;padding:22px;text-align:center;line-height:2}@media(max-width:720px){.curriculum-filter-bar{display:grid;grid-template-columns:1fr 1fr}.curriculum-filter-bar .filter-search{grid-column:1/-1}.curriculum-filter-bar select{width:100%;min-width:0}.catalog-meta span{max-width:100%}}
+
+/* Complete lesson layout */
+.complete-lesson{--lesson-accent:var(--accent,#9b7cff)}
+.complete-objectives{margin:22px 0;padding:20px 22px;border:1px solid rgba(155,124,255,.28);border-radius:18px;background:rgba(155,124,255,.07)}
+.complete-objectives h2{margin:0 0 12px;font-size:1.2rem}
+.complete-objectives ul,.complete-takeaways{margin:0;padding-inline-start:22px;display:grid;gap:9px;line-height:1.9}
+.complete-lesson-sections{display:grid;gap:18px}
+.complete-lesson-section{display:grid;grid-template-columns:46px minmax(0,1fr);gap:14px;padding:20px 0;border-bottom:1px solid var(--border,rgba(255,255,255,.12))}
+.complete-section-number{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;font-weight:800;color:var(--lesson-accent);background:rgba(155,124,255,.13)}
+.complete-section-content h3{margin:2px 0 12px;font-size:1.22rem;line-height:1.6}
+.complete-section-content p,.complete-misconception p,.complete-example p{line-height:2;margin:0 0 12px}
+.complete-example{margin:14px 0;padding:16px 18px;border-inline-start:3px solid var(--lesson-accent);border-radius:12px;background:rgba(120,180,255,.07)}
+.complete-example strong{display:block;margin-bottom:7px}
+.complete-misconception{padding:17px 18px;margin:12px 0;border:1px solid var(--border,rgba(255,255,255,.12));border-radius:14px}
+.complete-misconception h4{margin:0 0 8px;color:var(--lesson-accent);font-size:1rem}
+.complete-activity-steps{display:grid;gap:12px;padding:0;list-style:none;counter-reset:activity}
+.complete-activity-steps li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;align-items:start;line-height:1.9}
+.complete-activity-steps li span{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(155,124,255,.14);font-size:.8rem;font-weight:800}
+.complete-glossary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.complete-glossary-item{padding:14px;border:1px solid var(--border,rgba(255,255,255,.12));border-radius:13px}
+.complete-glossary-item dt{font-weight:800;color:var(--lesson-accent);margin-bottom:6px}
+.complete-glossary-item dd{margin:0;line-height:1.8}
+.complete-review-question{margin:10px 0;border:1px solid var(--border,rgba(255,255,255,.12));border-radius:13px;overflow:hidden}
+.complete-review-question summary{cursor:pointer;display:flex;gap:12px;align-items:flex-start;padding:15px;line-height:1.8;font-weight:700;list-style:none}
+.complete-review-question summary::-webkit-details-marker{display:none}
+.complete-review-question summary span{flex:0 0 30px;height:30px;border-radius:9px;display:grid;place-items:center;background:rgba(155,124,255,.14);color:var(--lesson-accent);font-size:.8rem}
+.complete-review-question>p{margin:0;padding:0 16px 17px 57px;line-height:1.9;color:var(--text-secondary,var(--text))}
+.complete-takeaways{margin-top:12px}
+@media(max-width:640px){.complete-lesson-section{grid-template-columns:34px minmax(0,1fr);gap:9px}.complete-section-number{width:32px;height:32px;border-radius:10px;font-size:.8rem}.complete-glossary{grid-template-columns:1fr}.complete-objectives{padding:16px}.complete-section-content h3{font-size:1.08rem}}
