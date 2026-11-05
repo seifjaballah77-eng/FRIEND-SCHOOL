@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded",function(){
   const targets=Object.keys(names).filter(x=>x!==from);
   button.disabled=true;button.textContent="جارٍ ترجمة اللغات…";output.textContent="يتم البحث عن المعنى في اللغات الأخرى…";
   try{
-   const results=await Promise.all(targets.map(async to=>{
+   const settled=await Promise.allSettled(targets.map(async to=>{
     const key="friendSchool_translation_"+from+"_"+to+"_"+query;
     let value=null;try{value=localStorage.getItem(key);}catch(_){}
     if(!value){
@@ -24,7 +24,9 @@ document.addEventListener("DOMContentLoaded",function(){
     }
     return {code:to,name:names[to],text:value};
    }));
-   output.innerHTML='<div class="language-results-heading"><strong>الترجمة في اللغات التسع الأخرى</strong><small>من '+esc(names[from])+'</small></div><div class="language-all-results">'+results.map(x=>'<article class="language-translation-card" dir="auto"><span>'+esc(x.name)+'</span><strong>'+esc(x.text)+'</strong><button type="button" class="language-copy-one" data-copy-language="'+esc(x.code)+'">نسخ</button></article>').join("")+'</div>';
+   const results=settled.filter(x=>x.status==="fulfilled").map(x=>x.value),failed=settled.length-results.length;
+   if(!results.length)throw Error("no translations");
+   output.innerHTML='<div class="language-results-heading"><strong>الترجمة في اللغات الأخرى</strong><small>من '+esc(names[from])+' · نجح '+results.length+' من '+targets.length+' لغات</small></div><div class="language-all-results">'+results.map(x=>'<article class="language-translation-card" dir="auto"><span>'+esc(x.name)+'</span><strong>'+esc(x.text)+'</strong><button type="button" class="language-copy-one" data-copy-language="'+esc(x.code)+'">نسخ</button></article>').join("")+'</div>'+(failed?'<small class="language-data-note">تعذر جلب بعض الترجمات مؤقتاً؛ أعد المحاولة لتلك اللغات.</small>':"");
    output.querySelectorAll("[data-copy-language]").forEach(b=>b.addEventListener("click",async()=>{const x=results.find(y=>y.code===b.dataset.copyLanguage);try{await navigator.clipboard.writeText(x.text);b.textContent="تم النسخ";}catch(_){b.textContent="انسخ يدوياً";}}));
   }catch(_){output.innerHTML="<strong>لم تكتمل ترجمة جميع اللغات.</strong><small>ربما بلغت خدمة الترجمة حد الاستخدام المؤقت. جرّب مجدداً بعد قليل.</small>";}
   finally{button.disabled=false;button.textContent="ترجم إلى كل اللغات ←";}
