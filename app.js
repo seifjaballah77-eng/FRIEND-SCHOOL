@@ -3440,13 +3440,13 @@ const steps=course.hasTerms
 :rawLines.flatMap(line=>(line.match(/[^.!؟]+[.!؟]?/g)||[line]).map(x=>x.trim()).filter(x=>x&&!/^\d+\.$/.test(x)));
 const selectedTerm=$("#termFilter")?.value||"all";
 const visibleTerms=course.hasTerms?(course.terms||[]).filter((t,i)=>selectedTerm==="all"||String(i+1)===selectedTerm):[];
-const termMarkup=visibleTerms.map((term,i)=>{
+const termMarkup=visibleTerms.map((term)=>{const termNumber=(course.terms||[]).indexOf(term)+1;
 const chapterMarkup=(term.chapters||[]).map((ch,j)=>{
 const chapterTitle=currentLanguage==="ar"||!ch.titleEn?ch.title:ch.titleEn;
 return '<li><span class="term-chapter-number">'+(j+1)+'</span><span>'+safeText(chapterTitle)+'</span>'+(ch.theme?'<small>'+safeText(ch.theme)+'</small>':'')+'</li>';
 }).join("");
 const focus=term.focus?'<p class="knowledge-term-focus">'+safeText(term.focus)+'</p>':"";
-return '<li class="knowledge-term-card"><div class="knowledge-term-heading"><span>0'+(i+1)+'</span><strong>'+safeText(term.nameAr)+'</strong><small>'+((term.chapters||[]).length?(term.chapters||[]).length+" فصل":"محور مقترح")+'</small></div>'+(chapterMarkup?'<ol class="knowledge-term-chapters">'+chapterMarkup+'</ol>':"")+focus+'</li>';
+return '<li class="knowledge-term-card"><div class="knowledge-term-heading"><span>0'+termNumber+'</span><strong>'+safeText(term.nameAr)+'</strong><small>'+((term.chapters||[]).length?(term.chapters||[]).length+" فصل":"محور مقترح")+'</small></div>'+(chapterMarkup?'<ol class="knowledge-term-chapters">'+chapterMarkup+'</ol>':"")+focus+'</li>';
 }).join("");
 const stepMarkup=course.hasTerms?termMarkup:steps.map((step,i)=>'<li class="knowledge-step"><span class="knowledge-step-index">'+String(i+1).padStart(2,"0")+'</span><div><strong>الخطوة '+(i+1)+'</strong><p>'+safeText(step)+'</p></div></li>').join("");
 const detailHeading=course.isOfficialCurriculum?"الفصول والمحاور حسب الثلاثيات":course.isAdvancedFramework?"الخطة الأكاديمية حسب الثلاثيات":"الشرح خطوة بخطوة";
