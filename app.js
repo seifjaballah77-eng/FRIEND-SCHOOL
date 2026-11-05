@@ -1085,6 +1085,8 @@ let cards = store.get("cards",[{q:"ما عاصمة تونس؟",a:"مدينة ت�
 let progress = store.get("progress",{lessons:[],minutes:0,quizzes:0,lastScore:null});
 let currentLanguage = store.get("language","ar");
 let countries = [];
+let officialCurriculumCourses = [];
+let officialCurriculumLoaded = false;
 let currentPage = "home";
 let currentCourse = null;
 let libraryTrack = "all";
@@ -1102,8 +1104,102 @@ function displayCountryName(code){const country=countries.find(item=>item.code==
 function populateCountrySelects(){const filter=$("#countryFilter"),profileSelect=$("#profileCountry");if(!filter||!profileSelect||!countries.length)return;const previous=filter.value||"all";filter.innerHTML="";const allLabel=currentLanguage==="ar"?"كل الدول والمناطق":currentLanguage==="fr"?"Tous les pays et territoires":"All countries and territories";filter.add(new Option(allLabel,"all"));const sorted=countries.slice().sort((a,b)=>displayCountryName(a.code).localeCompare(displayCountryName(b.code),currentLanguage));sorted.forEach(c=>filter.add(new Option(displayCountryName(c.code),c.code)));filter.value=sorted.some(c=>c.code===previous)?previous:"all";profileSelect.innerHTML="";sorted.forEach(c=>profileSelect.add(new Option(displayCountryName(c.code),c.code)));if(profile.country==="تونس")profile.country="TN";profileSelect.value=sorted.some(c=>c.code===profile.country)?profile.country:"TN";renderProfile();}
 async function loadCountries(){try{const response=await fetch("./countries.json");if(!response.ok)throw new Error("country data unavailable");countries=await response.json();populateCountrySelects();renderCourseCatalog();}catch(_){showToast("تعذر تحميل قائمة الدول؛ تحقق من الاتصال أول مرة.");}}
 function renderHomeCourses(){const host=$("#homeCourseList");host.innerHTML=courseData.slice(0,4).map(course=>'<div class="course-row" data-course="'+course.id+'"><div class="course-art '+course.art+'">'+course.icon+'</div><div class="course-row-main"><strong>'+safeText(course.title)+'</strong><small>'+safeText(course.tag)+' · '+course.time+'</small></div><span class="course-arrow">←</span></div>').join("");}
-function cardMarkup(course){return '<article class="catalog-card"><div class="catalog-top"><div class="course-art '+course.art+'">'+course.icon+'</div><span class="tag">'+safeText(course.tag)+'</span></div><h3>'+safeText(course.title)+'</h3><p>'+safeText(course.desc)+'</p><div class="catalog-meta"><span>'+safeText(course.level)+' · '+safeText(course.country==='*'?'دولي · قابل للتكييف':displayCountryName(course.country))+'</span><button data-course="'+course.id+'">افتح المسار ←</button></div></article>';}
-function renderCourseCatalog(){const search=($("#courseSearch")?.value||"").toLowerCase().trim();const country=$("#countryFilter")?.value||"all";const level=$("#levelFilter")?.value||"all";const catalog=[...courseData,...gradeCourses];const filtered=catalog.filter(c=>(!search||(c.title+" "+c.desc+" "+c.category+" "+c.lesson).toLowerCase().includes(search))&&(country==="all"||c.country===country||c.country==="*")&&(level==="all"||c.level===level));["exploreCourses","allCourses"].forEach(id=>{const host=$("#"+id);if(host)host.innerHTML=filtered.length?filtered.map(cardMarkup).join(""):'<div class="no-results">لا توجد نتائج مطابقة. جرّب كلمة أخرى.</div>';});}
+function courseDisplayTitle(course){
+if(!course.isOfficialCurriculum)return course.title;
+return currentLanguage==="fr"?course.subjectFr:currentLanguage==="en"?course.subjectEn:course.subjectAr;
+}
+function courseDisplaySection(course){
+if(!course.isOfficialCurriculum)return "";
+return currentLanguage==="fr"?course.sectionFr:currentLanguage==="en"?course.sectionEn:course.section;
+}
+function cardMarkup(course){
+const title=courseDisplayTitle(course);
+const meta=course.isOfficialCurriculum
+ ? course.level+" · "+courseDisplaySection(course)+" · "+course.chapterCount+" فصل"
+ : course.level+" · "+(course.country==="*"?"دولي · قابل للتكييف":displayCountryName(course.country));
+return '<article class="catalog-card"><div class="catalog-top"><div class="course-art '+course.art+'">'+course.icon+'</div><span class="tag">'+safeText(course.tag)+'</span></div><h3>'+safeText(title)+'</h3><p>'+safeText(course.desc)+'</p><div class="catalog-meta"><span>'+safeText(meta)+'</span><button data-course="'+course.id+'">افتح المادة ←</button></div></article>';
+}
+function curriculumTrack(code){
+if(code==="MATH")return "math";
+if(["PHYS","SVT","BIO","EVEIL"].includes(code))return "science";
+if(["TECHNO","INFO","ALGO","STI"].includes(code))return "technology";
+if(["ARAB","FRAN","ANGL","ALLEM","ESPA","ITAL","RUSSE","CHIN","PORT"].includes(code))return "humanities";
+return "humanities";
+}
+function curriculumArt(track){
+return track==="math"?["∑","art-math"]:track==="science"?["⚛","art-science"]:track==="technology"?["⌘","art-code"]:["Aa","art-lang"];
+}
+function populateSectionFilter(){
+const select=$("#sectionFilter");if(!select)return;
+const old=select.value||"all",unique=new Map();
+officialCurriculumCourses.forEach(c=>unique.set(c.sectionCode,courseDisplaySection(c)));
+select.innerHTML="";
+select.add(new Option("كل الشعب","all"));
+Array.from(unique.entries()).sort((a,b)=>a[1].localeCompare(b[1],"ar")).forEach(([code,name])=>select.add(new Option(name,code)));
+select.value=Array.from(select.options).some(o=>o.value===old)?old:"all";
+}
+async function loadOfficialCurriculum(){
+const status=$("#curriculumStatus");
+try{
+const response=await fetch("./curriculum-tn.json",{cache:"no-store"});
+if(!response.ok)throw new Error("HTTP "+response.status);
+const data=await response.json(),mapped=[];
+(data.levels||[]).forEach(level=>(level.sections||[]).forEach(section=>(section.subjects||[]).forEach(subject=>{
+const code=subject.code,track=curriculumTrack(code),art=curriculumArt(track);
+const className=level.code==="BAC"?"البكالوريا":level.nameAr;
+const chapterTitles=(subject.terms||[]).flatMap(term=>(term.chapters||[]).map(ch=>ch.title+" "+(ch.theme||"")));
+const summary=subject.hasTextbookChapters
+?"تتضمن المادة عناوين فصول من فهارس الكتب المدرسية التونسية. جُمعت في ثلاثيات مقترحة بحسب ترتيب الفصول، وليس وفق جدول رسمي تفصيلي للوزارة."
+:"المادة مدرجة ضمن مواد هذا المستوى في المرجع. لم يتوفر لها فهرس فصول في البيانات المنشورة؛ لذلك أضيفت محاور دعم مقترحة لكل ثلاثية، وليست عناوين رسمية.";
+mapped.push({
+id:"tn-"+level.code.toLowerCase()+"-"+section.code.toLowerCase()+"-"+code.toLowerCase(),
+title:subject.nameAr,lesson:subject.nameAr,subjectAr:subject.nameAr,subjectFr:subject.nameFr,subjectEn:subject.nameEn,
+category:track==="math"?"رياضيات":track==="science"?"علوم":track==="technology"?"تقنية":"إنسانيات",
+track,level:className,stage:className,levelCode:level.code,country:"TN",
+section:section.nameAr,sectionFr:section.nameFr,sectionEn:section.nameEn,sectionCode:section.code,
+icon:art[0],art:art[1],tag:"المنهج التونسي",time:"الثلاثيات الثلاث",
+desc:"مادة "+subject.nameAr+" · "+className+" · "+section.nameAr+" · "+subject.chapterCount+" عنوان فصل.",
+summary,body:"",chapterCount:subject.chapterCount,hasTextbookChapters:subject.hasTextbookChapters,
+terms:subject.terms||[],chapterSearchText:chapterTitles.join(" "),isOfficialCurriculum:true
+});
+})));
+officialCurriculumCourses=mapped;officialCurriculumLoaded=true;populateSectionFilter();
+if(status)status.textContent="تم تحميل فهرس المواد والفصول التونسية: 13 مستوى، 30 قسماً/شعبة، 442 مادة، و2,892 عنوان فصل. اختر السنة لعرض موادها وثلاثياتها.";
+renderCourseCatalog();
+}catch(error){
+officialCurriculumLoaded=false;
+if(status)status.textContent="تعذر تحميل فهرس المنهج التونسي الآن. تحقق من الاتصال ثم أعد تحميل الصفحة.";
+renderCourseCatalog();
+}
+}
+function renderCourseCatalog(){
+const search=($("#courseSearch")?.value||"").toLowerCase().trim();
+const country=$("#countryFilter")?.value||"all";
+const level=$("#levelFilter")?.value||"all";
+const section=$("#sectionFilter")?.value||"all";
+const term=$("#termFilter")?.value||"all";
+let catalog=[];
+const exactOfficialLevel=officialCurriculumCourses.some(c=>c.level===level);
+if(level!=="all"&&exactOfficialLevel&&(country==="all"||country==="TN")){
+catalog=officialCurriculumCourses.filter(c=>c.level===level&&(section==="all"||c.sectionCode===section));
+}else{
+catalog=[...courseData,...gradeCourses].filter(c=>(country==="all"||c.country===country||c.country==="*")&&(level==="all"||c.level===level));
+if(section!=="all"||term!=="all")catalog=[];
+}
+const filtered=catalog.filter(c=>{
+const title=courseDisplayTitle(c);
+const searchable=(title+" "+(c.subjectAr||"")+" "+(c.subjectFr||"")+" "+(c.subjectEn||"")+" "+c.desc+" "+c.category+" "+(c.lesson||"")+" "+(c.chapterSearchText||"")).toLowerCase();
+return !search||searchable.includes(search);
+});
+const status=$("#curriculumStatus");
+if(status&&level==="all")status.textContent=officialCurriculumLoaded
+?"اختر الدولة والسنة الدراسية أولاً لعرض مواد تلك السنة. عند اختيار تونس تظهر المواد والفصول المتاحة من المرجع التونسي، مقسمة إلى ثلاثيات مقترحة."
+:"جارٍ تحميل مرجع المنهج التونسي؛ يمكنك اختيار السنة بعد اكتمال التحميل.";
+["exploreCourses","allCourses"].forEach(id=>{
+const host=$("#"+id);if(!host)return;
+host.innerHTML=filtered.length?filtered.map(cardMarkup).join(""):'<div class="no-results">لا توجد مواد مطابقة لهذه التصفية. جرّب اختيار سنة أو شعبة أخرى.</div>';
+});
+}
 function renderLibrary(){
 const search=($("#librarySearch")?.value||"").toLowerCase().trim();
 const level=$("#libraryLevel")?.value||"all";
@@ -1114,9 +1210,9 @@ $("#libraryTrackFilters").querySelectorAll("[data-library-track]").forEach(butto
 }
 function renderProgress(){const count=progress.lessons.length;$("#statCourses").textContent=count;$("#statMinutes").textContent=progress.minutes;$("#statQuizzes").textContent=progress.quizzes;$("#statStreak").textContent=progress.days||0;$("#minuteLine").style.width=Math.min(100,progress.minutes/120*100)+"%";$("#quizLine").style.width=Math.min(100,progress.quizzes/10*100)+"%";$("#lastScore").textContent=progress.lastScore===null?"—":progress.lastScore+"%";}
 function openLesson(id){
-const course=courseData.find(c=>c.id===id)||gradeCourses.find(c=>c.id===id)||libraryData.find(c=>c.id===id);if(!course)return;
+const course=courseData.find(c=>c.id===id)||gradeCourses.find(c=>c.id===id)||officialCurriculumCourses.find(c=>c.id===id)||libraryData.find(c=>c.id===id);if(!course)return;
 currentCourse=course;
-const title=course.lesson||course.title;
+const title=course.isOfficialCurriculum?courseDisplayTitle(course):(course.lesson||course.title);
 const intro=course.summary||course.desc||"اكتشف هذا الموضوع خطوة بخطوة.";
 const explorer=(profile&&profile.name)||"المستكشف";
 const time=course.time||"15 دقيقة";
@@ -1124,18 +1220,31 @@ const track=course.track||(course.category==="علوم"?"science":course.categor
 const trackNames={science:"العلوم الطبيعية والفيزيائية",technology:"التقنية والذكاء الاصطناعي",math:"الرياضيات والمنطق",humanities:"الإنسانيات واللغات"};
 const trackName=trackNames[track]||course.category||"مكتبة المعرفة";
 const rawLines=String(course.body||intro).split(/\n+/).map(x=>x.trim()).filter(Boolean);
-const steps=rawLines.flatMap(line=>(line.match(/[^.!؟]+[.!؟]?/g)||[line]).map(x=>x.trim()).filter(x=>x&&!/^\d+\.$/.test(x)));
-const stepMarkup=steps.map((step,i)=>'<li class="knowledge-step"><span class="knowledge-step-index">'+String(i+1).padStart(2,"0")+'</span><div><strong>الخطوة '+(i+1)+'</strong><p>'+safeText(step)+'</p></div></li>').join("");
+const steps=course.isOfficialCurriculum
+?(course.terms||[]).flatMap(t=>(t.chapters||[]).map(ch=>ch.title).concat(t.focus?[t.focus]:[]))
+:rawLines.flatMap(line=>(line.match(/[^.!؟]+[.!؟]?/g)||[line]).map(x=>x.trim()).filter(x=>x&&!/^\d+\.$/.test(x)));
+const selectedTerm=$("#termFilter")?.value||"all";
+const visibleTerms=course.isOfficialCurriculum?(course.terms||[]).filter((t,i)=>selectedTerm==="all"||String(i+1)===selectedTerm):[];
+const termMarkup=visibleTerms.map((term,i)=>{
+const chapterMarkup=(term.chapters||[]).map((ch,j)=>{
+const chapterTitle=currentLanguage==="ar"||!ch.titleEn?ch.title:ch.titleEn;
+return '<li><span class="term-chapter-number">'+(j+1)+'</span><span>'+safeText(chapterTitle)+'</span>'+(ch.theme?'<small>'+safeText(ch.theme)+'</small>':'')+'</li>';
+}).join("");
+const focus=term.focus?'<p class="knowledge-term-focus">'+safeText(term.focus)+'</p>':"";
+return '<li class="knowledge-term-card"><div class="knowledge-term-heading"><span>0'+(i+1)+'</span><strong>'+safeText(term.nameAr)+'</strong><small>'+(term.chapters||[]).length+' فصل</small></div>'+(chapterMarkup?'<ol class="knowledge-term-chapters">'+chapterMarkup+'</ol>':"")+focus+'</li>';
+}).join("");
+const stepMarkup=course.isOfficialCurriculum?termMarkup:steps.map((step,i)=>'<li class="knowledge-step"><span class="knowledge-step-index">'+String(i+1).padStart(2,"0")+'</span><div><strong>الخطوة '+(i+1)+'</strong><p>'+safeText(step)+'</p></div></li>').join("");
+const detailHeading=course.isOfficialCurriculum?"الفصول والمحاور حسب الثلاثيات":"الشرح خطوة بخطوة";
 let methodSteps=[];
 if(track==="science")methodSteps=["لاحظ الظاهرة أو الفكرة العلمية وحدد السؤال الذي تريد فهمه.","تعرف على العناصر المؤثرة والعلاقة بينها.","اربط التفسير بمثال من الحياة اليومية.","لخّص ما توصلت إليه، وميّز بين الملاحظة والاستنتاج."];
 else if(track==="technology")methodSteps=["حدد المهمة أو المشكلة التي تعالجها التقنية.","تعرف على المكونات والبيانات والمدخلات.","تتبع الخطوات التي تنفذها التقنية للوصول إلى النتيجة.","جرّب مثالاً بسيطاً، ثم راجع النتيجة والأخطاء."];
 else if(track==="math")methodSteps=["اقرأ المسألة وحدد المعطيات والمطلوب.","اختر القاعدة أو النمط المناسب.","نفذ الحل خطوة خطوة واكتب العمليات بوضوح.","تحقق من النتيجة بالتعويض أو بطريقة أخرى."];
 else methodSteps=["ضع الفكرة في سياقها واسأل عن مصدر المعلومات.","اجمع الأدلة والأمثلة وقارن بينها.","ميّز بين الحقيقة والرأي والتفسير.","اكتب استنتاجاً واضحاً واذكر ما يدعمه من أدلة."];
 const methodMarkup=methodSteps.map(step=>'<li>'+safeText(step)+'</li>').join("");
-$("#modalCategory").textContent=trackName+" · "+(course.stage||course.level||"تعلم ذاتي")+" · "+time;
+$("#modalCategory").textContent=trackName+" · "+(course.stage||course.level||"تعلم ذاتي")+(course.isOfficialCurriculum?" · "+course.section:"")+" · "+time;
 $("#modalTitle").textContent=title;
 $("#modalDescription").textContent=intro;
-$("#modalContent").innerHTML='<div class="knowledge-page"><div class="knowledge-top"><button class="knowledge-back" id="knowledgeBack">← العودة</button><span>FRIEND SCHOOL · KNOWLEDGE</span></div><header class="knowledge-hero"><div class="knowledge-eyebrow">'+safeText(trackName)+' · رحلة استكشاف</div><h1>'+safeText(title)+'</h1><div class="knowledge-meta"><span>المرحلة: '+safeText(course.stage||course.level||"تعلم ذاتي")+'</span><span>المدة المقترحة: '+safeText(time)+'</span><span>المستكشف: '+safeText(explorer)+'</span></div></header><section class="knowledge-quicktake"><div class="knowledge-quick-label">QUICK TAKE · الملخص السريع</div><p>'+safeText(intro)+'</p></section><nav class="knowledge-toc"><a href="#knowledge-intro">المقدمة</a><a href="#knowledge-details">الشرح خطوة بخطوة</a><a href="#knowledge-method">طريقة العمل</a><a href="#knowledge-explore">وقت الاستكشاف</a><a href="#knowledge-end">الخاتمة</a></nav><section class="knowledge-section" id="knowledge-intro"><div class="knowledge-section-head"><span>01</span><div><small>START HERE</small><h2>مقدمة الموضوع</h2></div></div><p>'+safeText(course.desc||intro)+'</p></section><section class="knowledge-section" id="knowledge-details"><div class="knowledge-section-head"><span>02</span><div><small>STEP BY STEP</small><h2>الشرح خطوة بخطوة</h2></div></div><ol class="knowledge-step-list">'+stepMarkup+'</ol></section><section class="knowledge-section" id="knowledge-method"><div class="knowledge-section-head"><span>03</span><div><small>HOW IT WORKS</small><h2>طريقة العمل والفهم</h2></div></div><ol class="knowledge-method-list">'+methodMarkup+'</ol><div class="knowledge-tip"><strong>طريقة ذكية للتعلّم</strong><p>بعد الانتهاء، حاول شرح الفكرة دون النظر إلى النص، ثم راجع النقاط التي نسيتها.</p></div></section><section class="knowledge-section knowledge-explore" id="knowledge-explore"><div class="knowledge-section-head"><span>04</span><div><small>YOUR DISCOVERY</small><h2>وقت الاستكشاف</h2></div></div><div class="explore-stats"><div><strong>'+safeText(time)+'</strong><small>الوقت المقترح</small></div><div><strong>'+safeText(explorer)+'</strong><small>المستكشف</small></div><div><strong>'+steps.length+'</strong><small>نقاط الشرح</small></div></div><h3>مهمتك الاستكشافية</h3><p>اكتب سؤالاً واحداً أثاره هذا الموضوع، وابحث عن مثال واقعي يجيب عنه. ثم لخّص أهم ما اكتشفته في ثلاث جمل.</p></section><section class="knowledge-section" id="knowledge-end"><div class="knowledge-section-head"><span>05</span><div><small>TAKEAWAY</small><h2>الخاتمة وما تعلمته</h2></div></div><p>أصبحت لديك بداية منظمة لفهم «'+safeText(title)+'». راجع النقاط الأساسية، وتحقق من المعلومات، وجرّب تطبيق ما تعلمته في مثال جديد.</p></section></div>';
+$("#modalContent").innerHTML='<div class="knowledge-page"><div class="knowledge-top"><button class="knowledge-back" id="knowledgeBack">← العودة</button><span>FRIEND SCHOOL · KNOWLEDGE</span></div><header class="knowledge-hero"><div class="knowledge-eyebrow">'+safeText(trackName)+' · رحلة استكشاف</div><h1>'+safeText(title)+'</h1><div class="knowledge-meta"><span>المرحلة: '+safeText(course.stage||course.level||"تعلم ذاتي")+'</span>'+(course.isOfficialCurriculum?'<span>الشعبة: '+safeText(course.section)+'</span>':"")+'<span>المدة المقترحة: '+safeText(time)+'</span><span>المستكشف: '+safeText(explorer)+'</span></div></header><section class="knowledge-quicktake"><div class="knowledge-quick-label">QUICK TAKE · الملخص السريع</div><p>'+safeText(intro)+'</p></section><nav class="knowledge-toc"><a href="#knowledge-intro">المقدمة</a><a href="#knowledge-details">الشرح خطوة بخطوة</a><a href="#knowledge-method">طريقة العمل</a><a href="#knowledge-explore">وقت الاستكشاف</a><a href="#knowledge-end">الخاتمة</a></nav><section class="knowledge-section" id="knowledge-intro"><div class="knowledge-section-head"><span>01</span><div><small>START HERE</small><h2>مقدمة الموضوع</h2></div></div><p>'+safeText(course.desc||intro)+'</p></section><section class="knowledge-section" id="knowledge-details"><div class="knowledge-section-head"><span>02</span><div><small>STEP BY STEP</small><h2>'+safeText(detailHeading)+'</h2></div></div><ol class="knowledge-step-list">'+stepMarkup+'</ol></section><section class="knowledge-section" id="knowledge-method"><div class="knowledge-section-head"><span>03</span><div><small>HOW IT WORKS</small><h2>طريقة العمل والفهم</h2></div></div><ol class="knowledge-method-list">'+methodMarkup+'</ol><div class="knowledge-tip"><strong>طريقة ذكية للتعلّم</strong><p>بعد الانتهاء، حاول شرح الفكرة دون النظر إلى النص، ثم راجع النقاط التي نسيتها.</p></div></section><section class="knowledge-section knowledge-explore" id="knowledge-explore"><div class="knowledge-section-head"><span>04</span><div><small>YOUR DISCOVERY</small><h2>وقت الاستكشاف</h2></div></div><div class="explore-stats"><div><strong>'+safeText(time)+'</strong><small>الوقت المقترح</small></div><div><strong>'+safeText(explorer)+'</strong><small>المستكشف</small></div><div><strong>'+(course.isOfficialCurriculum?course.chapterCount:steps.length)+'</strong><small>'+(course.isOfficialCurriculum?"فصول المادة":"نقاط الشرح")+'</small></div></div><h3>مهمتك الاستكشافية</h3><p>اكتب سؤالاً واحداً أثاره هذا الموضوع، وابحث عن مثال واقعي يجيب عنه. ثم لخّص أهم ما اكتشفته في ثلاث جمل.</p></section><section class="knowledge-section" id="knowledge-end"><div class="knowledge-section-head"><span>05</span><div><small>TAKEAWAY</small><h2>الخاتمة وما تعلمته</h2></div></div><p>أصبحت لديك بداية منظمة لفهم «'+safeText(title)+'». راجع النقاط الأساسية، وتحقق من المعلومات، وجرّب تطبيق ما تعلمته في مثال جديد.</p>'+(course.isOfficialCurriculum?'<div class="knowledge-source-note">'+safeText("مصدر عناوين المواد والفصول: مرجع المنهج التونسي وفهارس الكتب المدرسية للمركز الوطني البيداغوجي CNP. التقسيم إلى ثلاثيات داخل التطبيق مقترح حسب ترتيب الفصول، ولا يعني أن الوزارة اعتمدت هذا التوزيع التفصيلي.")+'<br><span>'+safeText("Tunisian Official Curriculum dataset · CC BY 4.0 · Israaelhouch (2026)")+'</span></div>':"")+'</section></div>';
 $("#lessonModal").hidden=false;
 $("#knowledgeBack").addEventListener("click",closeLesson);
 $("#modalContent").querySelectorAll(".knowledge-toc a").forEach(link=>link.addEventListener("click",e=>{e.preventDefault();const target=$(link.getAttribute("href"));if(target)target.scrollIntoView({behavior:"smooth",block:"start"});}));
@@ -1171,8 +1280,8 @@ function renderProfile(){const name=profile.name||"طالب جديد";$("#sideNa
 function setTheme(theme){document.body.classList.toggle("light",theme==="light");store.set("theme",theme);$("#themeToggle").textContent=theme==="light"?"☾":"☼";}
 function exportData(){const data={profile,tasks,notes,cards,progress,exportedAt:new Date().toISOString()};const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="friend-school-data.json";a.click();URL.revokeObjectURL(url);showToast("تم تجهيز نسخة من بياناتك.");}
 function clearAllData(){if(!confirm("هل أنت متأكد؟ سيؤدي ذلك إلى حذف الملاحظات والبطاقات والمهام والتقدم المحفوظ على هذا الجهاز."))return;["profile","tasks","notes","cards","progress","language","theme"].forEach(k=>localStorage.removeItem("friendSchool_"+k));location.reload();}
-function init(){renderHomeCourses();renderCourseCatalog();renderLibrary();renderTasks();renderNotes();renderFlashcard();renderQuiz();renderProgress();renderProfile();const now=new Date();$("#todayLabel").textContent=now.toLocaleDateString(currentLanguage==="ar"?"ar-TN":currentLanguage==="fr"?"fr-FR":"en-US",{weekday:"long",day:"numeric",month:"long"});$("#taskDate").value=new Date().toISOString().slice(0,10);setTheme(store.get("theme","dark"));applyLanguage(currentLanguage);loadCountries();displayTimer();convertUnits();
-$$("[data-view]").forEach(b=>b.addEventListener("click",()=>switchPage(b.dataset.view)));$$("[data-go]").forEach(b=>b.addEventListener("click",()=>switchPage(b.dataset.go)));document.addEventListener("click",e=>{const course=e.target.closest("[data-course]");if(course){openLesson(course.dataset.course);return;}const topic=e.target.closest("[data-library-topic]");if(topic)openLesson(topic.dataset.libraryTopic);});document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches("[data-library-topic]")){e.preventDefault();openLesson(e.target.dataset.libraryTopic);}});$("#mobileMenu").addEventListener("click",()=>$("#sidebar").classList.toggle("open"));$("#themeToggle").addEventListener("click",()=>setTheme(document.body.classList.contains("light")?"dark":"light"));$("#languageToggle").addEventListener("click",()=>{const order=["ar","en","fr"];applyLanguage(order[(order.indexOf(currentLanguage)+1)%order.length]);});$("#globalSearch").addEventListener("keydown",e=>{if(e.key==="Enter"){const q=e.target.value.trim();switchPage("explore");$("#courseSearch").value=q;renderCourseCatalog();}});$("#courseSearch").addEventListener("input",renderCourseCatalog);$("#countryFilter").addEventListener("change",renderCourseCatalog);$("#levelFilter").addEventListener("change",renderCourseCatalog);$("#librarySearch").addEventListener("input",renderLibrary);$("#libraryLevel").addEventListener("change",renderLibrary);$("#libraryTrackFilters").addEventListener("click",e=>{const button=e.target.closest("[data-library-track]");if(!button)return;libraryTrack=button.dataset.libraryTrack;renderLibrary();});
+function init(){renderHomeCourses();renderCourseCatalog();renderLibrary();renderTasks();renderNotes();renderFlashcard();renderQuiz();renderProgress();renderProfile();const now=new Date();$("#todayLabel").textContent=now.toLocaleDateString(currentLanguage==="ar"?"ar-TN":currentLanguage==="fr"?"fr-FR":"en-US",{weekday:"long",day:"numeric",month:"long"});$("#taskDate").value=new Date().toISOString().slice(0,10);setTheme(store.get("theme","dark"));applyLanguage(currentLanguage);loadCountries();loadOfficialCurriculum();displayTimer();convertUnits();
+$$("[data-view]").forEach(b=>b.addEventListener("click",()=>switchPage(b.dataset.view)));$$("[data-go]").forEach(b=>b.addEventListener("click",()=>switchPage(b.dataset.go)));document.addEventListener("click",e=>{const course=e.target.closest("[data-course]");if(course){openLesson(course.dataset.course);return;}const topic=e.target.closest("[data-library-topic]");if(topic)openLesson(topic.dataset.libraryTopic);});document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches("[data-library-topic]")){e.preventDefault();openLesson(e.target.dataset.libraryTopic);}});$("#mobileMenu").addEventListener("click",()=>$("#sidebar").classList.toggle("open"));$("#themeToggle").addEventListener("click",()=>setTheme(document.body.classList.contains("light")?"dark":"light"));$("#languageToggle").addEventListener("click",()=>{const order=["ar","en","fr"];applyLanguage(order[(order.indexOf(currentLanguage)+1)%order.length]);});$("#globalSearch").addEventListener("keydown",e=>{if(e.key==="Enter"){const q=e.target.value.trim();switchPage("explore");$("#courseSearch").value=q;renderCourseCatalog();}});$("#courseSearch").addEventListener("input",renderCourseCatalog);$("#countryFilter").addEventListener("change",renderCourseCatalog);$("#levelFilter").addEventListener("change",renderCourseCatalog);$("#sectionFilter").addEventListener("change",renderCourseCatalog);$("#termFilter").addEventListener("change",renderCourseCatalog);$("#librarySearch").addEventListener("input",renderLibrary);$("#libraryLevel").addEventListener("change",renderLibrary);$("#libraryTrackFilters").addEventListener("click",e=>{const button=e.target.closest("[data-library-track]");if(!button)return;libraryTrack=button.dataset.libraryTrack;renderLibrary();});
 $("#libraryGrid").addEventListener("click",e=>{const card=e.target.closest("[data-library-topic]");if(card)openLesson(card.dataset.libraryTopic);});$("#libraryGrid").addEventListener("keydown",e=>{const card=e.target.closest("[data-library-topic]");if(card&&(e.key==="Enter"||e.key===" ")){e.preventDefault();openLesson(card.dataset.libraryTopic);}});$("#closeModal").addEventListener("click",closeLesson);$("#lessonModal").addEventListener("click",e=>{if(e.target===$("#lessonModal"))closeLesson();});$("#markLesson").addEventListener("click",()=>{if(!currentCourse)return;if(!progress.lessons.includes(currentCourse.id)){progress.lessons.push(currentCourse.id);store.set("progress",progress);renderProgress();}showToast("تم تسجيل الدرس ضمن تقدمك.");closeLesson();});$("#lessonQuiz").addEventListener("click",()=>{closeLesson();switchPage("quiz");resetQuiz();});$("#quizNext").addEventListener("click",nextQuiz);$("#quizRestart").addEventListener("click",resetQuiz);$("#quizBody").addEventListener("click",e=>{const b=e.target.closest("[data-answer]");if(b)answerQuiz(Number(b.dataset.answer));});
 $("#flashcard").addEventListener("click",flipCard);$("#flashPrev").addEventListener("click",()=>{flashIndex--;flashFlipped=false;renderFlashcard();});$("#flashNext").addEventListener("click",()=>{flashIndex++;flashFlipped=false;renderFlashcard();});$("#addCardBtn").addEventListener("click",addFlashcard);$$("[data-rating]").forEach(b=>b.addEventListener("click",()=>{showToast(b.dataset.rating==="again"?"سنراجعها مرة أخرى.":b.dataset.rating==="good"?"أحسنت، واصل المراجعة.":"ممتاز!");flashIndex++;flashFlipped=false;renderFlashcard();}));
 $("#taskForm").addEventListener("submit",addTask);$$("[data-task-filter]").forEach(b=>b.addEventListener("click",()=>{taskFilter=b.dataset.taskFilter;$$("[data-task-filter]").forEach(x=>x.classList.toggle("active",x===b));renderTasks();}));$("#taskList").addEventListener("change",e=>{const id=Number(e.target.dataset.taskCheck);if(!id)return;const t=tasks.find(x=>x.id===id);if(t)t.done=e.target.checked;store.set("tasks",tasks);renderTasks();});$("#taskList").addEventListener("click",e=>{const id=Number(e.target.dataset.taskDelete);if(!id)return;tasks=tasks.filter(t=>t.id!==id);store.set("tasks",tasks);renderTasks();});
