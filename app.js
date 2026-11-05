@@ -3294,9 +3294,15 @@ const searchable=(title+" "+(c.subjectAr||"")+" "+(c.subjectFr||"")+" "+(c.subje
 return !search||searchable.includes(search);
 });
 const status=$("#curriculumStatus");
-if(status&&level==="all")status.textContent=officialCurriculumLoaded
-?"اختر الدولة والسنة الدراسية أولاً لعرض مواد تلك السنة. عند اختيار تونس تظهر المواد والفصول المتاحة من المرجع التونسي، مقسمة إلى ثلاثيات مقترحة."
-:"جارٍ تحميل مرجع المنهج التونسي؛ يمكنك اختيار السنة بعد اكتمال التحميل.";
+if(status){
+ if(level==="all")status.textContent=officialCurriculumLoaded
+  ?"اختر تونس والسنة الدراسية لعرض فهرسها التفصيلي: 442 مادة وعناوين فصول موزعة إلى ثلاثيات مقترحة. أما الدول الأخرى فتحتاج إلى مراجعها الوطنية."
+  :"جارٍ تحميل مرجع المنهج التونسي؛ يمكنك اختيار السنة بعد اكتمال التحميل.";
+ else if(level==="الجامعة"||level==="الدراسات العليا")status.textContent="المسارات الجامعية والدراسات العليا معروضة بسداسيين تعليميين مقترحين. تختلف الخطة الرسمية بحسب الجامعة والاختصاص.";
+ else if(level==="الدكتوراه والبحث المتقدم")status.textContent="مسارات الدكتوراه مقسمة إلى مرحلتي بحث مقترحتين، وليست تقويماً جامعياً موحداً.";
+ else if(officialCurriculumCourses.some(c=>c.level===level)&&(country==="all"||country==="TN"))status.textContent="يعرض هذا المستوى المواد والفصول المتاحة في المرجع التونسي. التقسيم إلى ثلاثيات مقترح، والمحاور المعلّمة مقترحة عند غياب فهرس الفصل.";
+ else status.textContent="المواد الظاهرة هنا إطار تأسيسي عام قابل للتكييف، وليست فهرساً رسمياً معتمداً لهذه الدولة.";
+}
 ["exploreCourses","allCourses"].forEach(id=>{
 const host=$("#"+id);if(!host)return;
 host.innerHTML=filtered.length?filtered.map(cardMarkup).join(""):'<div class="no-results">لا توجد مواد مطابقة لهذه التصفية. جرّب اختيار سنة أو شعبة أخرى.</div>';
