@@ -30,6 +30,7 @@
         <button class="nav-link active" data-view="home"><span class="nav-icon">⌂</span><span data-i18n="navHome">الرئيسية</span></button>
         <button class="nav-link" data-view="explore"><span class="nav-icon">◎</span><span data-i18n="navExplore">استكشف المناهج</span><span class="nav-count">✦</span></button>
         <button class="nav-link" data-view="courses"><span class="nav-icon">▤</span><span data-i18n="navCourses">موادي ودروسي</span></button>
+        <button class="nav-link" data-view="languages"><span class="nav-icon">文</span><span>تعلّم اللغات</span><span class="nav-count">10</span></button>
         <button class="nav-link" data-view="quiz"><span class="nav-icon">✎</span><span data-i18n="navQuiz">الاختبارات</span></button>
         <button class="nav-link" data-view="cards"><span class="nav-icon">▧</span><span data-i18n="navCards">بطاقات الحفظ</span></button>
         <button class="nav-link" data-view="games"><span class="nav-icon">♧</span><span data-i18n="navGames">ألعاب تعليمية</span></button>
@@ -155,6 +156,23 @@
         <section class="page" id="page-library">
           <div class="page-intro"><div><span class="section-kicker" data-i18n="curiosity">مساحة الفضول</span><h1 data-i18n="libraryTitle">مكتبة المعرفة</h1><p data-i18n="libraryDesc">استكشف المعرفة عبر أربعة مسارات واضحة، واختر المرحلة المناسبة لمستواك.</p></div><div class="intro-icon knowledge-library-art" aria-hidden="true"></div></div>
           <div class="filter-bar library-filter-bar"><label class="filter-search">⌕ <input id="librarySearch" type="search" placeholder="ابحث عن مفهوم أو موضوع..."></label><select id="libraryLevel" aria-label="المرحلة الدراسية"><option value="all">كل المراحل الدراسية</option><option value="ابتدائي">التعليم الأساسي / الابتدائي</option><option value="إعدادي">الإعدادي</option><option value="ثانوي">الثانوي</option><option value="جامعي">الجامعة / التعليم العالي</option></select></div><div class="library-track-filters" id="libraryTrackFilters" role="group" aria-label="المسارات المعرفية"><button type="button" class="active" data-library-track="all">كل المسارات</button><button type="button" data-library-track="science">العلوم الطبيعية والفيزيائية</button><button type="button" data-library-track="technology">التقنية والذكاء الاصطناعي</button><button type="button" data-library-track="math">الرياضيات والمنطق</button><button type="button" data-library-track="humanities">الإنسانيات واللغات</button></div><div class="library-grid" id="libraryGrid"></div>
+        </section>
+
+        <section class="page" id="page-languages">
+          <div class="page-intro"><div><span class="section-kicker">LANGUAGE LAB • 10 LANGUAGES</span><h1>تعلّم اللغات</h1><p>تعلّم المفردات الأساسية، وابحث عن ترجمة الكلمات والجمل بسرعة.</p></div><div class="intro-icon">文</div></div>
+          <div class="language-hero panel"><div><span class="language-hero-tag">ابدأ من كلمة واحدة</span><h2>عشر لغات في مكان واحد</h2><p>العربية والإنجليزية والفرنسية والإسبانية والألمانية والإيطالية والبرتغالية والروسية والصينية واليابانية.</p></div><div class="language-orbit" aria-hidden="true"><span>ع</span><span>A</span><span>文</span><span>Ж</span></div></div>
+          <div class="language-translator panel">
+            <div class="panel-heading"><div><span class="section-kicker">QUICK TRANSLATE</span><h2>الترجمة السريعة</h2></div><span class="online-translation">ترجمة عبر الإنترنت</span></div>
+            <div class="language-selectors"><label>من لغة<select id="languageFrom"><option value="ar">العربية</option><option value="en" selected>الإنجليزية</option><option value="fr">الفرنسية</option><option value="es">الإسبانية</option><option value="de">الألمانية</option><option value="it">الإيطالية</option><option value="pt">البرتغالية</option><option value="ru">الروسية</option><option value="zh-CN">الصينية</option><option value="ja">اليابانية</option></select></label><button class="language-swap" id="languageSwap" type="button" title="تبديل اللغتين">⇄</button><label>إلى لغة<select id="languageTo"><option value="ar" selected>العربية</option><option value="en">الإنجليزية</option><option value="fr">الفرنسية</option><option value="es">الإسبانية</option><option value="de">الألمانية</option><option value="it">الإيطالية</option><option value="pt">البرتغالية</option><option value="ru">الروسية</option><option value="zh-CN">الصينية</option><option value="ja">اليابانية</option></select></label></div>
+            <label class="language-input-label" for="languageQuery">اكتب كلمة أو جملة</label><textarea id="languageQuery" rows="3" maxlength="500" placeholder="مثال: Good morning, how are you?"></textarea>
+            <div class="language-translate-actions"><small>يمكن ترجمة كلمات وجمل قصيرة. جودة النتيجة تختلف حسب اللغة والسياق.</small><button class="primary-button" id="translateLanguage" type="button">ترجم الآن ←</button></div>
+            <div class="language-result" id="languageResult" aria-live="polite"><span>ستظهر الترجمة هنا.</span></div>
+          </div>
+          <div class="language-vocabulary panel"><div class="panel-heading"><div><span class="section-kicker">START LEARNING</span><h2>مفردات أساسية</h2><p>اختر لغة لعرض كلماتها مع معناها بالعربية.</p></div><select id="vocabularyLanguage" aria-label="لغة المفردات"><option value="en">الإنجليزية</option><option value="fr">الفرنسية</option><option value="es">الإسبانية</option><option value="de">الألمانية</option><option value="it">الإيطالية</option><option value="pt">البرتغالية</option><option value="ru">الروسية</option><option value="zh-CN">الصينية</option><option value="ja">اليابانية</option><option value="ar">العربية</option></select></div>
+            <label class="language-input-label" for="vocabularySearch">ابحث في المفردات</label><input id="vocabularySearch" type="search" placeholder="ابحث عن كلمة أو معناها بالعربية...">
+            <div class="language-word-grid" id="languageWordGrid"></div>
+            <p class="language-data-note">هذه مجموعة بداية للتعلّم وليست قاموساً شاملاً. استخدم الترجمة السريعة للبحث عن كلمات وعبارات إضافية؛ وتتطلب اتصالاً بالإنترنت.</p>
+          </div>
         </section>
 
         <section class="page" id="page-settings">
