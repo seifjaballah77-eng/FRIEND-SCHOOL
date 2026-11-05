@@ -59,3 +59,8 @@ Add a license file before accepting external contributions.
 ## Country list data
 The bundled `countries.json` is derived from the datasets/country-list project, which republishes ISO 3166-1 alpha-2 names and codes. It includes countries and territories; it does **not** mean that official school curricula for all listed places are already included.
 Source: https://github.com/datasets/country-list (data file: https://raw.githubusercontent.com/datasets/country-list/main/data.csv).
+
+
+## Tunisian curriculum data
+
+The application includes `curriculum-tn.json`, adapted from the **Tunisian Official Curriculum** dataset by Israaelhouch (2026), licensed under **CC BY 4.0**. The reference provides official subject lists and chapter titles from CNP textbook contents. The app groups chapter titles into three suggested terms for browsing; this is not a ministry-issued term calendar. Subjects without chapter lists are shown with clearly labelled suggested learning focuses. Source: https://huggingface.co/datasets/israa-elhouch/tunisian-official-curriculum
