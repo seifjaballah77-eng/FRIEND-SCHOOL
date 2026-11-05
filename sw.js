@@ -1,4 +1,4 @@
-const CACHE_NAME = "friend-school-v6";
+const CACHE_NAME = "friend-school-v7";
 const APP_FILES = ["./", "./index.html", "./styles.css", "./app.js", "./manifest.webmanifest", "./icon.svg", "./countries.json", "./curriculum-tn.json"];
 
 self.addEventListener("install", event => {
